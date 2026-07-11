@@ -245,16 +245,131 @@
   .case-link .arrow{ transition:transform 0.25s ease; }
   .case-link:hover .arrow{ transform:translateX(4px); }
 
+  /* ---------- Testimonials (glass) ---------- */
+  .testimonials{
+    position:relative;
+    background:linear-gradient(180deg, #F6F6F4 0%, #FBFBFA 100%);
+    padding:8rem 8vw;
+    border-top:1px solid var(--line);
+    border-bottom:1px solid var(--line);
+    overflow:hidden;
+  }
+  .testimonials::before,
+  .testimonials::after{
+    content:'';
+    position:absolute;
+    border-radius:50%;
+    filter:blur(70px);
+    z-index:0;
+    pointer-events:none;
+  }
+  .testimonials::before{
+    width:380px; height:380px;
+    background:var(--coral);
+    opacity:0.16;
+    top:-140px; left:6%;
+  }
+  .testimonials::after{
+    width:320px; height:320px;
+    background:#A9C7FF;
+    opacity:0.22;
+    bottom:-120px; right:8%;
+  }
+  .testi-card-shell{
+    position:relative;
+    z-index:1;
+    max-width:640px;
+    margin:0 auto;
+    padding:3.6rem 3.2rem;
+    border-radius:28px;
+    background:rgba(255,255,255,0.45);
+    backdrop-filter:blur(28px) saturate(180%);
+    -webkit-backdrop-filter:blur(28px) saturate(180%);
+    border:1px solid rgba(255,255,255,0.65);
+    box-shadow:
+      0 1px 1px rgba(255,255,255,0.6) inset,
+      0 24px 60px -20px rgba(29,29,29,0.14);
+  }
+  .testi-track{
+    position:relative;
+    min-height:180px;
+    text-align:center;
+  }
+  .testi-slide{
+    position:absolute; inset:0;
+    opacity:0; visibility:hidden;
+    transition:opacity 0.9s ease, visibility 0.9s;
+  }
+  .testi-slide.active{
+    position:relative;
+    opacity:1; visibility:visible;
+  }
+  .testi-quote-mark{
+    display:block;
+    font-family:Georgia, 'Times New Roman', serif;
+    font-size:2.2rem;
+    line-height:1;
+    color:var(--coral);
+    opacity:0.55;
+    font-weight:400;
+    margin-bottom:0.6rem;
+  }
+  .testi-quote{
+    font-family:var(--font-body);
+    font-weight:400;
+    font-size:clamp(1.15rem, 1.8vw, 1.4rem);
+    line-height:1.65;
+    letter-spacing:0.002em;
+    color:var(--heading);
+  }
+  .testi-meta{
+    margin-top:2rem;
+    display:flex; flex-direction:column; align-items:center;
+  }
+  .testi-avatar{
+    width:38px; height:38px; border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    font-family:var(--font-body); font-weight:600; font-size:10px;
+    color:var(--heading);
+    background:rgba(255,255,255,0.7);
+    border:1px solid rgba(255,255,255,0.9);
+    box-shadow:0 4px 10px rgba(29,29,29,0.06);
+    margin-bottom:0.8rem;
+  }
+  .testi-name{ font-size:var(--p3); font-weight:600; color:var(--heading); letter-spacing:0.01em; }
+  .testi-role{
+    font-size:10px; font-weight:500; color:var(--text-faint);
+    text-transform:uppercase; letter-spacing:0.09em;
+    margin-top:0.3rem;
+  }
+
+  .testi-dots{ position:relative; z-index:1; display:flex; justify-content:center; gap:0.5rem; margin-top:2.8rem; }
+  .testi-dot{
+    width:6px; height:6px; border-radius:3px; padding:0;
+    border:none; background:rgba(29,29,29,0.18); cursor:pointer;
+    transition:all 0.35s ease;
+  }
+  .testi-dot.active{ background:var(--coral); width:18px; }
+
   footer{
     margin-top:4rem; padding: 3.5rem 8vw 3rem;
     border-top:1px solid var(--line);
     display:flex; justify-content:space-between; align-items:flex-end;
     flex-wrap:wrap; gap:2rem;
   }
-  footer h2{ font-size:var(--h2); max-width:14ch; }
-  footer .contact-links{ display:flex; flex-direction:column; gap:0.6rem; font-family:var(--font-body); font-size:var(--p3); }
-  footer .contact-links a{ color:var(--body-text); }
-  footer .contact-links a:hover{ color:var(--coral); }
+  footer h2{ font-size:var(--h2); max-width:20ch; }
+  footer .contact-links{ display:flex; flex-direction:column; align-items:flex-end; gap:1rem; font-family:var(--font-body); font-size:var(--p3); }
+  footer .contact-email{ color:var(--coral); font-size:var(--p2); font-weight:500; }
+  footer .contact-email:hover{ opacity:0.8; }
+  footer .social-icons{ display:flex; align-items:center; gap:1.1rem; }
+  footer .social-icons a{
+    display:flex; align-items:center; justify-content:center;
+    width:34px; height:34px; border-radius:50%;
+    color:var(--heading);
+    border:1px solid var(--line);
+    transition:background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+  }
+  footer .social-icons a:hover{ background:var(--coral); border-color:var(--coral); color:#fff; }
   footer .foot-note{ width:100%; margin-top:3rem; font-family:var(--font-body); font-size:var(--p3); color:var(--text-faint); letter-spacing:0.02em; }
 
   @media (max-width: 860px){
@@ -273,6 +388,10 @@
     .hero{ padding:4rem 6vw 3rem; }
     .clients{ padding:2.5rem 6vw 3.5rem; gap:2rem 2.5rem; }
     .clients img{ height:90px; width:90px; }
+    .testimonials{ padding:4.5rem 6vw; }
+    .testi-card-shell{ padding:2.4rem 1.8rem; border-radius:22px; }
+    footer{ align-items:flex-start; }
+    footer .contact-links{ align-items:flex-start; }
   }
 
   @media (prefers-reduced-motion: reduce){
@@ -462,12 +581,66 @@
   </div>
 </main>
 
+<section class="testimonials">
+  <div class="testi-card-shell">
+    <div class="testi-track">
+      <div class="testi-slide active" data-index="0">
+        <span class="testi-quote-mark">&#8220;</span>
+        <p class="testi-quote">Amruta is one of the most talented designers I've had in my team at Dentsu. She has a strong design sense and clarity of thought when it comes to shaping strategy.</p>
+        <div class="testi-meta">
+          <div class="testi-avatar">PS</div>
+          <div class="testi-name">Praveen Sekar</div>
+          <div class="testi-role">Group Creative Director, Dentsu</div>
+        </div>
+      </div>
+
+      <div class="testi-slide" data-index="1">
+        <span class="testi-quote-mark">&#8220;</span>
+        <p class="testi-quote">I had the privilege of collaborating with Amruta on the Immismart website, and her creativity and attention to detail are truly exceptional.</p>
+        <div class="testi-meta">
+          <div class="testi-avatar">JS</div>
+          <div class="testi-name">Jaffar Syed</div>
+          <div class="testi-role">Head of Digital Marketing, Immi Smart</div>
+        </div>
+      </div>
+
+      <div class="testi-slide" data-index="2">
+        <span class="testi-quote-mark">&#8220;</span>
+        <p class="testi-quote">Amruta delivered an exceptional body of work that meaningfully elevated our brand — highly communicative, reliable, and unwavering in delivering on time.</p>
+        <div class="testi-meta">
+          <div class="testi-avatar">G</div>
+          <div class="testi-name">Garry</div>
+          <div class="testi-role">Founder, Mother Cow Dairy</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="testi-dots">
+    <button class="testi-dot active" data-index="0" aria-label="Testimonial 1"></button>
+    <button class="testi-dot" data-index="1" aria-label="Testimonial 2"></button>
+    <button class="testi-dot" data-index="2" aria-label="Testimonial 3"></button>
+  </div>
+</section>
+
 <footer id="contact">
   <h2>From concept to creation,<br>let's make it happen</h2>
   <div class="contact-links">
-    <a href="mailto:amruta.inbox@gmail.com">amruta.inbox@gmail.com</a>
-    <a href="#">Instagram</a>
-    <a href="#">LinkedIn</a>
+    <a class="contact-email" href="mailto:amruta.inbox@gmail.com">amruta.inbox@gmail.com</a>
+    <div class="social-icons">
+      <a href="mailto:amruta.inbox@gmail.com" aria-label="Email">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M3 5h18v14H3V5Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M3 6l9 7 9-7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+      <a href="https://www.linkedin.com/in/YOUR-PROFILE" target="_blank" rel="noopener" aria-label="LinkedIn">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M6.5 8.5H3.5V20H6.5V8.5Z" fill="currentColor"/><circle cx="5" cy="4.8" r="1.9" fill="currentColor"/><path d="M9.5 8.5H12.4V10.1C12.9 9.1 14.2 8.2 16 8.2C19.3 8.2 20.5 10.2 20.5 13.6V20H17.5V14.2C17.5 12.5 16.9 11.3 15.4 11.3C14.2 11.3 13.5 12.1 13.2 12.9C13.1 13.2 13.1 13.6 13.1 14V20H10.1C10.1 20 10.1 9.2 9.5 8.5Z" fill="currentColor"/></svg>
+      </a>
+      <a href="https://www.instagram.com/YOUR-PROFILE" target="_blank" rel="noopener" aria-label="Instagram">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><rect x="3.5" y="3.5" width="17" height="17" rx="5" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.8"/><circle cx="17.2" cy="6.8" r="1.1" fill="currentColor"/></svg>
+      </a>
+      <a href="https://www.youtube.com/@YOUR-CHANNEL" target="_blank" rel="noopener" aria-label="YouTube">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><rect x="2.5" y="5.5" width="19" height="13" rx="4" stroke="currentColor" stroke-width="1.8"/><path d="M10.3 9.3v5.4l4.7-2.7-4.7-2.7Z" fill="currentColor"/></svg>
+      </a>
+    </div>
   </div>
   <div class="foot-note">© 2026 Amruta J — Brisbane, Australia</div>
 </footer>
@@ -516,6 +689,31 @@
       if(target) target.scrollIntoView({ behavior:'smooth', block:'center' });
     });
   });
+
+  /* ---------- Testimonials carousel (lean crossfade) ---------- */
+  const testiSlides = Array.from(document.querySelectorAll('.testi-slide'));
+  const testiDots = Array.from(document.querySelectorAll('.testi-dot'));
+  let testiIndex = 0;
+  let testiTimer;
+
+  function goToTesti(i){
+    testiIndex = (i + testiSlides.length) % testiSlides.length;
+    testiSlides.forEach((s, idx) => s.classList.toggle('active', idx === testiIndex));
+    testiDots.forEach((d, idx) => d.classList.toggle('active', idx === testiIndex));
+  }
+
+  function startTestiTimer(){
+    clearInterval(testiTimer);
+    testiTimer = setInterval(() => goToTesti(testiIndex + 1), 6000);
+  }
+
+  if(testiSlides.length){
+    testiDots.forEach(dot => {
+      dot.addEventListener('click', () => { goToTesti(Number(dot.dataset.index)); startTestiTimer(); });
+    });
+    startTestiTimer();
+  }
+
 </script>
 
 </body>
