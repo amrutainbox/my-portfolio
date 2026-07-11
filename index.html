@@ -132,12 +132,16 @@
 
   /* ---------- Client logos row ---------- */
   .clients{
+    border-bottom:1px solid var(--line);
+  }
+  .clients-inner{
     padding: 1.5rem 8vw 4rem;
+    max-width:1280px;
+    margin:0 auto;
     display:flex;
     flex-wrap:wrap;
     align-items:center;
     gap:3.2rem 4.5rem;
-    border-bottom:1px solid var(--line);
   }
   .client-card{
     display:flex;
@@ -390,7 +394,7 @@
     .project{ grid-template-columns:1fr; gap:1.5rem; }
     .topnav{ padding:2rem 6vw 0; }
     .hero{ padding:4rem 6vw 3rem; }
-    .clients{ padding:2.5rem 6vw 3.5rem; gap:2rem 2.5rem; }
+    .clients-inner{ padding:2.5rem 6vw 3.5rem; gap:2rem 2.5rem; }
     .clients img{ height:90px; width:90px; }
     .testimonials{ padding:4.5rem 6vw; }
     .testi-card-shell.side{ display:none; }
@@ -422,12 +426,14 @@
 </section>
 
 <div class="clients">
-  <div class="client-card"><img src="Emma-Sleep.png" alt="Emma Sleep"></div>
-  <div class="client-card"><img src="amazon.png" alt="Amazon"></div>
-  <div class="client-card"><img src="Safari.png" alt="Safari"></div>
-  <div class="client-card"><img src="AstraZenca.png" alt="AstraZeneca"></div>
-  <div class="client-card"><img src="jbl.png" alt="JBL"></div>
-  <div class="client-card"><img src="Harman-Kardon-logo.png" alt="Harman Kardon"></div>
+  <div class="clients-inner">
+    <div class="client-card"><img src="Emma-Sleep.png" alt="Emma Sleep"></div>
+    <div class="client-card"><img src="amazon.png" alt="Amazon"></div>
+    <div class="client-card"><img src="Safari.png" alt="Safari"></div>
+    <div class="client-card"><img src="AstraZenca.png" alt="AstraZeneca"></div>
+    <div class="client-card"><img src="jbl.png" alt="JBL"></div>
+    <div class="client-card"><img src="Harman-Kardon-logo.png" alt="Harman Kardon"></div>
+  </div>
 </div>
 
 <main>
