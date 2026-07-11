@@ -249,35 +249,14 @@
   }
 
 
-  /* ---------- Testimonials (glass, 3-card) ---------- */
+  /* ---------- Testimonials (3-card) ---------- */
   .testimonials{
     position:relative;
-    background:linear-gradient(180deg, #F6F6F4 0%, #FBFBFA 100%);
+    background:var(--bg);
     padding:8rem 8vw 4rem;
     border-top:1px solid var(--line);
     border-bottom:1px solid var(--line);
     overflow:hidden;
-  }
-  .testimonials::before,
-  .testimonials::after{
-    content:'';
-    position:absolute;
-    border-radius:50%;
-    filter:blur(70px);
-    z-index:0;
-    pointer-events:none;
-  }
-  .testimonials::before{
-    width:380px; height:380px;
-    background:var(--coral);
-    opacity:0.16;
-    top:-140px; left:6%;
-  }
-  .testimonials::after{
-    width:320px; height:320px;
-    background:#A9C7FF;
-    opacity:0.22;
-    bottom:-120px; right:8%;
   }
   .testi-row{
     position:relative; z-index:1;
@@ -287,13 +266,9 @@
   }
   .testi-card-shell{
     border-radius:26px;
-    background:rgba(255,255,255,0.45);
-    backdrop-filter:blur(28px) saturate(180%);
-    -webkit-backdrop-filter:blur(28px) saturate(180%);
-    border:1px solid rgba(255,255,255,0.65);
-    box-shadow:
-      0 1px 1px rgba(255,255,255,0.6) inset,
-      0 24px 60px -20px rgba(29,29,29,0.14);
+    background:var(--surface);
+    border:1px solid var(--line);
+    box-shadow:0 24px 60px -20px rgba(29,29,29,0.10);
     transition:filter 0.6s ease, opacity 0.6s ease, transform 0.6s ease, flex-basis 0.6s ease;
   }
   .testi-card-shell.active{
