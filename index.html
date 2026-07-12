@@ -256,6 +256,46 @@
   }
 
 
+  /* ---------- Side projects ---------- */
+  .side-projects{
+    max-width:1280px; margin:0 auto;
+    padding:5rem 8vw 6rem;
+  }
+  .side-projects .tag-label{
+    display:inline-block;
+    font-family:var(--font-body); font-weight:600;
+    font-size:11px; letter-spacing:0.12em; text-transform:uppercase;
+    color:var(--coral);
+    margin-bottom:1rem;
+  }
+  .side-projects h2{ font-size:var(--h3); max-width:36ch; margin-bottom:0.9rem; }
+  .side-projects p.desc{
+    font-family:var(--font-body); color:var(--body-text); font-size:var(--p2);
+    max-width:58ch; margin-bottom:2.4rem; line-height:1.7;
+  }
+  .side-project-frame{
+    position:relative;
+    border-radius:20px;
+    overflow:hidden;
+    border:1px solid var(--line);
+    background:var(--surface-2);
+    box-shadow:0 24px 60px -24px rgba(29,29,29,0.16);
+  }
+  .side-project-frame iframe{
+    width:100%; height:420px; border:none; display:block;
+  }
+  .side-project-link{
+    display:inline-flex; align-items:center; gap:0.5rem;
+    margin-top:1.5rem;
+    font-family:var(--font-body); font-size:var(--p3); font-weight:500;
+    color:var(--heading);
+    border-bottom:1px solid transparent;
+    transition:border-color 0.2s ease, color 0.2s ease;
+  }
+  .side-project-link:hover{ color:var(--coral); border-color:var(--coral); }
+  .side-project-link svg{ transition:transform 0.2s ease; }
+  .side-project-link:hover svg{ transform:translate(2px,-2px); }
+
   /* ---------- Testimonials (3-card) ---------- */
   .testimonials{
     position:relative;
@@ -393,6 +433,8 @@
     .hero{ padding:4rem 6vw 3rem; }
     .clients{ padding:2.5rem 6vw 3.5rem; gap:2rem 2.5rem; }
     .clients img{ height:90px; width:90px; }
+    .side-projects{ padding:3.5rem 6vw 4rem; }
+    .side-project-frame iframe{ height:340px; }
     .testimonials{ padding:4.5rem 6vw; }
     .testi-card-shell.side{ display:none; }
     .testi-card-shell.active{ flex:1 1 100%; max-width:none; padding:2.4rem 1.8rem; border-radius:22px; }
@@ -413,7 +455,7 @@
 </div>
 
 <section class="hero">
-  <h1 class="headline">Product &amp; Digital Designer<br>Fueled by Coffee & Curiosity</h1>
+  <h1 class="headline">Product &amp; Digital Designer<br>Exploring and Experimenting with AI</h1>
   <a class="hero-cta" href="mailto:amruta.inbox@gmail.com">
     Let's connect
     <span class="dot">
@@ -543,6 +585,19 @@
 
   </div>
 </main>
+
+<section class="side-projects">
+  <span class="tag-label">Side projects</span>
+  <h2>A space to tinker</h2>
+  <p class="desc">I'm teaching myself to code and experimenting with new AI tools on the side — this little gallery app is one of the things that's come out of it.</p>
+  <div class="side-project-frame">
+    <iframe src="gradient-skies.html" title="Found in Nature — a side project" loading="lazy"></iframe>
+  </div>
+  <a class="side-project-link" href="gradient-skies.html" target="_blank" rel="noopener">
+    Open full experience
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H8M17 7V16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </a>
+</section>
 
 <section class="testimonials">
   <div class="testi-row">
