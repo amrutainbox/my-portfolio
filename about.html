@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Amruta J — About</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  @font-face{
+    font-family:'Bricolage Grotesque Condensed';
+    src: url('BricolageGrotesque48ptCondensed-SemiBold.ttf') format('truetype');
+    font-weight:600;
+    font-style:normal;
+    font-display:swap;
+  }
+
+  :root{
+    --bg: #FAFAFA;
+    --surface: #FFFFFF;
+    --surface-2: #F1F0EE;
+    --heading: #1D1D1D;
+    --body-text: #4A4948;
+    --text-faint: #8C8B89;
+    --coral: #FF5C4D;
+    --coral-dim: rgba(255,92,77,0.12);
+    --line: rgba(29,29,29,0.09);
+
+    --font-heading: 'Bricolage Grotesque Condensed', 'Bricolage Grotesque', 'Inter', sans-serif;
+    --font-body: 'Inter', sans-serif;
+
+    --h1: 56px;
+    --h2: 42px;
+    --h3: 30px;
+    --h4: 24px;
+    --h5: 18px;
+    --p1: 22px;
+    --p2: 16px;
+    --p3: 14px;
+  }
+
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg);
+    color:var(--body-text);
+    font-family:var(--font-body);
+    font-size:var(--p2);
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  a{color:inherit;text-decoration:none;}
+  ::selection{background:var(--coral); color:#fff;}
+  :focus-visible{ outline:2px solid var(--coral); outline-offset:3px; }
+
+  h1,h2,h3,h4,h5{
+    font-family:var(--font-heading);
+    font-weight:600;
+    color:var(--heading);
+    letter-spacing:0.01em;
+    line-height:1.15;
+  }
+
+  /* ---------- Top nav ---------- */
+  .topnav{
+    display:flex; align-items:center; justify-content:space-between;
+    padding: 3.5rem 8vw 0;
+  }
+  .logo-text{
+    font-family:var(--font-heading);
+    font-size:var(--h5);
+    font-weight:600;
+    color:var(--coral);
+    letter-spacing:0.01em;
+  }
+  .topnav nav a{
+    font-family:var(--font-body);
+    font-size:var(--p2); font-weight:500; color:var(--heading);
+    padding-bottom:2px; border-bottom:1px solid transparent;
+    transition:border-color 0.2s ease;
+  }
+  .topnav nav a:hover{ border-color:var(--coral); color:var(--coral); }
+
+  /* ---------- About hero (photo + bio) ---------- */
+  .about-hero{
+    max-width:1280px; margin:0 auto;
+    padding:4rem 8vw 5rem;
+    display:grid;
+    grid-template-columns: 1fr 1.05fr;
+    gap:4rem;
+    align-items:start;
+  }
+  .about-photo{
+    position:relative;
+    aspect-ratio: 4/3.3;
+    border-radius:18px;
+    overflow:hidden;
+    background:var(--surface-2);
+    border:1px solid var(--line);
+  }
+  .about-photo .ph-slide{
+    position:absolute; inset:0;
+    opacity:0; visibility:hidden;
+    transition:opacity 0.6s ease, visibility 0.6s;
+  }
+  .about-photo .ph-slide.active{ position:relative; opacity:1; visibility:visible; }
+  .about-photo img{ width:100%; height:100%; object-fit:cover; display:block; position:relative; z-index:2; }
+  .about-photo .ph-label{
+    position:absolute; inset:0; z-index:1;
+    display:flex; align-items:center; justify-content:center;
+    color:var(--text-faint); font-size:var(--p3); text-align:center; padding:1rem;
+  }
+  .about-photo .photo-arrow{
+    position:absolute; top:50%; transform:translateY(-50%);
+    width:36px; height:36px; border-radius:50%;
+    background:rgba(255,255,255,0.9);
+    border:none; cursor:pointer;
+    display:flex; align-items:center; justify-content:center;
+    color:var(--heading);
+    box-shadow:0 6px 18px rgba(29,29,29,0.14);
+    z-index:3;
+    transition:background 0.2s ease, transform 0.2s ease;
+  }
+  .about-photo .photo-arrow:hover{ background:var(--coral); color:#fff; }
+  .about-photo .photo-arrow.prev{ left:14px; }
+  .about-photo .photo-arrow.next{ right:14px; }
+
+  .about-text h2{ font-size:var(--h3); margin-bottom:1.5rem; }
+  .about-text p{
+    font-family:var(--font-body); color:var(--body-text); font-size:var(--p2);
+    line-height:1.75; margin-bottom:1.3rem; max-width:56ch;
+  }
+
+  /* ---------- Interests strip ---------- */
+  .interests{
+    max-width:1280px; margin:0 auto;
+    padding:0 8vw 6rem;
+  }
+  .interests h3{ font-size:var(--h4); margin-bottom:1.8rem; }
+  .interests-wrap{ position:relative; }
+  .interests-track{
+    display:flex; gap:1.1rem;
+    overflow-x:auto;
+    scroll-behavior:smooth;
+    scroll-snap-type:x proximity;
+    padding-bottom:0.4rem;
+    -ms-overflow-style:none; scrollbar-width:none;
+  }
+  .interests-track::-webkit-scrollbar{ display:none; }
+  .interest-item{
+    position:relative;
+    flex:0 0 240px;
+    aspect-ratio:1/1;
+    border-radius:14px;
+    overflow:hidden;
+    background:var(--surface-2);
+    border:1px solid var(--line);
+    scroll-snap-align:start;
+  }
+  .interest-item img{ width:100%; height:100%; object-fit:cover; display:block; position:relative; z-index:2; }
+  .interest-item .ph-label{
+    position:absolute; inset:0; z-index:1;
+    display:flex; align-items:center; justify-content:center;
+    color:var(--text-faint); font-size:var(--p3); text-align:center; padding:0.6rem;
+  }
+  .interests-nav{
+    position:absolute; top:50%; right:-8px; transform:translateY(-50%);
+    width:38px; height:38px; border-radius:50%;
+    background:var(--surface);
+    border:1px solid var(--line);
+    cursor:pointer;
+    display:flex; align-items:center; justify-content:center;
+    color:var(--heading);
+    box-shadow:0 8px 20px rgba(29,29,29,0.1);
+    transition:background 0.2s ease, color 0.2s ease;
+  }
+  .interests-nav:hover{ background:var(--coral); color:#fff; border-color:var(--coral); }
+
+  /* ---------- Footer (shared with homepage) ---------- */
+  footer{
+    margin-top:0; padding: 3.5rem 8vw 3rem;
+    display:flex; justify-content:space-between; align-items:flex-end;
+    flex-wrap:wrap; gap:2rem;
+    border-top:1px solid var(--line);
+  }
+  footer h2{ font-size:var(--h2); max-width:30ch; }
+  footer .contact-links{ display:flex; flex-direction:column; align-items:flex-end; gap:1rem; font-family:var(--font-body); font-size:var(--p3); }
+  footer .contact-email{ color:var(--coral); font-size:var(--p2); font-weight:500; }
+  footer .contact-email:hover{ opacity:0.8; }
+  footer .social-icons{ display:flex; align-items:center; gap:1.1rem; }
+  footer .social-icons a{
+    display:flex; align-items:center; justify-content:center;
+    width:34px; height:34px; border-radius:50%;
+    color:var(--heading);
+    border:1px solid var(--line);
+    transition:background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+  }
+  footer .social-icons a:hover{ background:var(--coral); border-color:var(--coral); color:#fff; }
+  footer .foot-note{ width:100%; margin-top:3rem; font-family:var(--font-body); font-size:var(--p3); color:var(--text-faint); letter-spacing:0.02em; }
+
+  @media (max-width: 860px){
+    .topnav{ padding:2rem 6vw 0; }
+    .about-hero{ grid-template-columns:1fr; gap:2.5rem; padding:3rem 6vw 3.5rem; }
+    .interests{ padding:0 6vw 4rem; }
+    .interests-nav{ display:none; }
+    footer{ align-items:flex-start; padding:3rem 6vw 2.5rem; }
+    footer .contact-links{ align-items:flex-start; }
+  }
+</style>
+</head>
+<body>
+
+<div class="topnav">
+  <a class="logo-text" href="index.html">Amruta J</a>
+  <nav><a href="index.html">Home</a></nav>
+</div>
+
+<section class="about-hero">
+  <div class="about-photo">
+    <div class="ph-slide active">
+      <img src="about-photo-1.jpg" alt="Amruta portrait 1" onerror="this.style.display='none'">
+      <div class="ph-label">Photo 1 — replace src="about-photo-1.jpg"</div>
+    </div>
+    <div class="ph-slide">
+      <img src="about-photo-2.jpg" alt="Amruta portrait 2" onerror="this.style.display='none'">
+      <div class="ph-label">Photo 2 — replace src="about-photo-2.jpg"</div>
+    </div>
+    <div class="ph-slide">
+      <img src="about-photo-3.jpg" alt="Amruta portrait 3" onerror="this.style.display='none'">
+      <div class="ph-label">Photo 3 — replace src="about-photo-3.jpg"</div>
+    </div>
+    <button class="photo-arrow prev" aria-label="Previous photo">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M15 6l-6 6 6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <button class="photo-arrow next" aria-label="Next photo">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+  </div>
+
+  <div class="about-text">
+    <h2>More about me...</h2>
+    <p>I'm a brand &amp; UX/UI Designer based in Brisbane &amp; Gold Coast focused on designing and building user-friendly, impactful designs. I studied Applied Arts, and my skills have been shaped on the job through collaboration with peers, hands-on delivery, and personal study.</p>
+    <p>In your team you'll find me confident contributor, leading teams through complex design processes. I've guided projects from concept to completion across diverse domains and user groups. I've worked across sectors including Dentsu and Syneos Health, where I've been involved from early ideas through to delivery.</p>
+    <p>My approach combines strong UX methodology with a background in graphic design and marketing, along with technical skills, making me both a specialist and a versatile collaborator.</p>
+  </div>
+</section>
+
+<section class="interests">
+  <h3>What I do when I'm not working?</h3>
+  <div class="interests-wrap">
+    <div class="interests-track" id="interestsTrack">
+      <div class="interest-item">
+        <img src="interest-1.jpg" alt="Interest 1" onerror="this.style.display='none'">
+        <div class="ph-label">1 — "interest-1.jpg"</div>
+      </div>
+      <div class="interest-item">
+        <img src="interest-2.jpg" alt="Interest 2" onerror="this.style.display='none'">
+        <div class="ph-label">2 — "interest-2.jpg"</div>
+      </div>
+      <div class="interest-item">
+        <img src="interest-3.jpg" alt="Interest 3" onerror="this.style.display='none'">
+        <div class="ph-label">3 — "interest-3.jpg"</div>
+      </div>
+      <div class="interest-item">
+        <img src="interest-4.jpg" alt="Interest 4" onerror="this.style.display='none'">
+        <div class="ph-label">4 — "interest-4.jpg"</div>
+      </div>
+      <div class="interest-item">
+        <img src="interest-5.jpg" alt="Interest 5" onerror="this.style.display='none'">
+        <div class="ph-label">5 — "interest-5.jpg"</div>
+      </div>
+      <div class="interest-item">
+        <img src="interest-6.jpg" alt="Interest 6" onerror="this.style.display='none'">
+        <div class="ph-label">6 — "interest-6.jpg"</div>
+      </div>
+    </div>
+    <button class="interests-nav" id="interestsNext" aria-label="Scroll interests right">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+  </div>
+</section>
+
+<footer id="contact">
+  <h2>From concept to creation,<br>let's make it happen</h2>
+  <div class="contact-links">
+    <a class="contact-email" href="mailto:amruta.inbox@gmail.com">amruta.inbox@gmail.com</a>
+    <div class="social-icons">
+      <a href="mailto:amruta.inbox@gmail.com" aria-label="Email">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M3 5h18v14H3V5Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M3 6l9 7 9-7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+      <a href="https://www.linkedin.com/in/YOUR-PROFILE" target="_blank" rel="noopener" aria-label="LinkedIn">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M6.5 8.5H3.5V20H6.5V8.5Z" fill="currentColor"/><circle cx="5" cy="4.8" r="1.9" fill="currentColor"/><path d="M9.5 8.5H12.4V10.1C12.9 9.1 14.2 8.2 16 8.2C19.3 8.2 20.5 10.2 20.5 13.6V20H17.5V14.2C17.5 12.5 16.9 11.3 15.4 11.3C14.2 11.3 13.5 12.1 13.2 12.9C13.1 13.2 13.1 13.6 13.1 14V20H10.1C10.1 20 10.1 9.2 9.5 8.5Z" fill="currentColor"/></svg>
+      </a>
+      <a href="https://www.instagram.com/YOUR-PROFILE" target="_blank" rel="noopener" aria-label="Instagram">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><rect x="3.5" y="3.5" width="17" height="17" rx="5" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.8"/><circle cx="17.2" cy="6.8" r="1.1" fill="currentColor"/></svg>
+      </a>
+      <a href="https://www.youtube.com/@YOUR-CHANNEL" target="_blank" rel="noopener" aria-label="YouTube">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><rect x="2.5" y="5.5" width="19" height="13" rx="4" stroke="currentColor" stroke-width="1.8"/><path d="M10.3 9.3v5.4l4.7-2.7-4.7-2.7Z" fill="currentColor"/></svg>
+      </a>
+    </div>
+  </div>
+  <div class="foot-note">© 2026 Amruta J — Brisbane, Australia</div>
+</footer>
+
+<script>
+  /* ---------- About photo carousel ---------- */
+  const phSlides = Array.from(document.querySelectorAll('.ph-slide'));
+  const prevBtn = document.querySelector('.photo-arrow.prev');
+  const nextBtn = document.querySelector('.photo-arrow.next');
+  let phIndex = 0;
+
+  function goToPhoto(i){
+    phIndex = (i + phSlides.length) % phSlides.length;
+    phSlides.forEach((s, idx) => s.classList.toggle('active', idx === phIndex));
+  }
+
+  if(phSlides.length){
+    prevBtn.addEventListener('click', () => goToPhoto(phIndex - 1));
+    nextBtn.addEventListener('click', () => goToPhoto(phIndex + 1));
+  }
+
+  /* ---------- Interests horizontal scroll ---------- */
+  const interestsTrack = document.getElementById('interestsTrack');
+  const interestsNext = document.getElementById('interestsNext');
+  if(interestsTrack && interestsNext){
+    interestsNext.addEventListener('click', () => {
+      const itemWidth = interestsTrack.querySelector('.interest-item').offsetWidth + 18;
+      const atEnd = interestsTrack.scrollLeft + interestsTrack.clientWidth >= interestsTrack.scrollWidth - 10;
+      interestsTrack.scrollTo({
+        left: atEnd ? 0 : interestsTrack.scrollLeft + itemWidth * 2,
+        behavior:'smooth'
+      });
+    });
+  }
+</script>
+
+</body>
+</html>
