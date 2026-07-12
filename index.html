@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Amruta J — Product & Digital Designer</title>
+<title>Amruta J — Graphic & Digital Designer</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -83,7 +83,7 @@
   }
   .logo-text{
     font-family:var(--font-heading);
-    font-size:var(--h4);
+    font-size:var(--h5);
     font-weight:600;
     color:var(--coral);
     letter-spacing:0.01em;
@@ -109,8 +109,8 @@
     margin-bottom:0.6rem;
   }
   h1.headline{
-    max-width:42ch;
-    font-size:clamp(1.7rem, 3.4vw, 40px);
+    max-width:24ch;
+    font-size:clamp(2.1rem, 4.6vw, var(--h1));
     letter-spacing:0.010em;
   }
   .hero-cta{
@@ -132,17 +132,12 @@
 
   /* ---------- Client logos row ---------- */
   .clients{
-    border-bottom:1px solid var(--line);
-  }
-  .clients-inner{
     padding: 1.5rem 8vw 4rem;
-    max-width:1280px;
-    margin:0 auto;
     display:flex;
     flex-wrap:wrap;
     align-items:center;
-    justify-content:flex-start;
-    gap:2rem 3.5rem;
+    gap:3.2rem 4.5rem;
+    border-bottom:1px solid var(--line);
   }
   .client-card{
     display:flex;
@@ -150,8 +145,8 @@
     justify-content:center;
   }
   .clients img{
-    height:44px;
-    width:auto;
+    height:150px;
+    width:150px;
     max-width:150px;
     object-fit:contain;
     opacity:0.75;
@@ -395,8 +390,8 @@
     .project{ grid-template-columns:1fr; gap:1.5rem; }
     .topnav{ padding:2rem 6vw 0; }
     .hero{ padding:4rem 6vw 3rem; }
-    .clients-inner{ padding:2.5rem 6vw 3.5rem; gap:2rem 2.5rem; }
-    .clients img{ height:36px; width:auto; max-width:120px; }
+    .clients{ padding:2.5rem 6vw 3.5rem; gap:2rem 2.5rem; }
+    .clients img{ height:90px; width:90px; }
     .testimonials{ padding:4.5rem 6vw; }
     .testi-card-shell.side{ display:none; }
     .testi-card-shell.active{ flex:1 1 100%; max-width:none; padding:2.4rem 1.8rem; border-radius:22px; }
@@ -417,7 +412,7 @@
 </div>
 
 <section class="hero">
-  <h1 class="headline">Product &amp; Digital Designer<br>Exploring and Experimenting with AI</h1>
+  <h1 class="headline">Graphic &amp; Digital Designer<br>Exploring and Experimenting with AI</h1>
   <a class="hero-cta" href="#contact">
     Let's connect
     <span class="dot">
@@ -427,14 +422,12 @@
 </section>
 
 <div class="clients">
-  <div class="clients-inner">
-    <div class="client-card"><img src="Emma-Sleep.png" alt="Emma Sleep"></div>
-    <div class="client-card"><img src="amazon.png" alt="Amazon"></div>
-    <div class="client-card"><img src="Safari.png" alt="Safari"></div>
-    <div class="client-card"><img src="AstraZenca.png" alt="AstraZeneca"></div>
-    <div class="client-card"><img src="jbl.png" alt="JBL"></div>
-    <div class="client-card"><img src="Harman-Kardon-logo.png" alt="Harman Kardon"></div>
-  </div>
+  <div class="client-card"><img src="Emma-Sleep.png" alt="Emma Sleep"></div>
+  <div class="client-card"><img src="amazon.png" alt="Amazon"></div>
+  <div class="client-card"><img src="Safari.png" alt="Safari"></div>
+  <div class="client-card"><img src="AstraZenca.png" alt="AstraZeneca"></div>
+  <div class="client-card"><img src="jbl.png" alt="JBL"></div>
+  <div class="client-card"><img src="Harman-Kardon-logo.png" alt="Harman Kardon"></div>
 </div>
 
 <main>
@@ -442,7 +435,7 @@
     <div class="ruler-track">
       <div class="ruler-line"></div>
       <div class="ruler-fill" id="rulerFill"></div>
-      <div class="ruler-item active" data-year="2026"><span class="ruler-dot"></span><span class="ruler-year">2026</span></div>
+      <div class="ruler-item" data-year="2026"><span class="ruler-dot"></span><span class="ruler-year">2026</span></div>
       <div class="ruler-item" data-year="2024"><span class="ruler-dot"></span><span class="ruler-year">2024</span></div>
       <div class="ruler-item" data-year="2023"><span class="ruler-dot"></span><span class="ruler-year">2023</span></div>
       <div class="ruler-item" data-year="2021"><span class="ruler-dot"></span><span class="ruler-year">2021</span></div>
@@ -458,7 +451,7 @@
       <p>A run through recent projects, year by year — swap these placeholders for your own case studies.</p>
     </section>
 
-    <article class="project visible" id="p2026" data-year="2026">
+    <article class="project" id="p2026" data-year="2026">
       <div class="project-visual">
         <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
           <rect width="400" height="300" fill="#F1F0EE"/>
