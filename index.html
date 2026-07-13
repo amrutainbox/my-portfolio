@@ -263,6 +263,26 @@
   .project-info h3{ font-size:var(--h4); margin-bottom:0.8rem; }
   .project-info p.desc{ font-family:var(--font-body); color:var(--body-text); font-size:var(--p2); max-width:48ch; margin-bottom:1.3rem; }
   .skill-chips{ display:flex; flex-wrap:wrap; gap:0.5rem; margin-bottom:0; }
+
+  /* ---------- Paired cards (two case studies under one year) ---------- */
+  .project.pair{ display:block; cursor:default; }
+  .project.pair:hover{ background:transparent; }
+  .pair-grid{
+    display:grid; grid-template-columns:1fr 1fr; gap:2.4rem;
+  }
+  .pair-card{ display:flex; flex-direction:column; }
+  .pair-card .pair-visual{
+    aspect-ratio: 4/3; border-radius:8px; overflow:hidden;
+    background:var(--surface-2); border:1px solid var(--line);
+    margin-bottom:1.4rem;
+  }
+  .pair-card .pair-visual img{ width:100%; height:100%; object-fit:cover; display:block; }
+  .pair-card .tag-row{ display:flex; align-items:center; gap:0.8rem; margin-bottom:1rem; }
+  .pair-card h3{ font-size:var(--h4); margin-bottom:0.8rem; }
+  .pair-card p.desc{ font-family:var(--font-body); color:var(--body-text); font-size:var(--p2); max-width:48ch; margin-bottom:1.3rem; }
+  @media (max-width: 860px){
+    .pair-grid{ grid-template-columns:1fr; gap:2.2rem; }
+  }
   .chip{
     font-family:var(--font-body); font-size:var(--p3); color:var(--body-text); background:var(--surface);
     border:1px solid var(--line); padding:0.3rem 0.7rem; border-radius:20px;
@@ -495,7 +515,7 @@
       <div class="ruler-item" data-year="2024"><span class="ruler-dot"></span><span class="ruler-year">2024</span></div>
       <div class="ruler-item" data-year="2023"><span class="ruler-dot"></span><span class="ruler-year">2023</span></div>
       <div class="ruler-item" data-year="2021"><span class="ruler-dot"></span><span class="ruler-year">2021</span></div>
-      <div class="ruler-item" data-year="2020"><span class="ruler-dot"></span><span class="ruler-year">2020</span></div>
+      <div class="ruler-item" data-year="2019"><span class="ruler-dot"></span><span class="ruler-year">2019</span></div>
       <div class="ruler-item" data-year="2018"><span class="ruler-dot"></span><span class="ruler-year">2018</span></div>
     </div>
   </nav>
@@ -542,7 +562,7 @@
 
     <article class="project" id="p2023" data-year="2023">
       <div class="project-visual">
-        <img src="https://raw.githubusercontent.com/amything/my-portfolio/main/Urban%20Cruiser.png" alt="ImmiSmart — Urban Cruiser">
+        <img src="https://raw.githubusercontent.com/amything/my-portfolio/main/Mix1.jpg" alt="ImmiSmart project visual">
       </div>
       <div class="project-info">
         <div class="tag-row"><span class="tag">Project title</span><span class="project-year">2023</span></div>
@@ -568,30 +588,56 @@
       </div>
     </article>
 
-    <article class="project" id="p2020" data-year="2020">
-      <div class="project-visual">
-        <img src="https://raw.githubusercontent.com/amything/my-portfolio/main/HK%20cover.png" alt="JBL &amp; Harman-Kardon cover">
-      </div>
-      <div class="project-info">
-        <div class="tag-row"><span class="tag">Project title</span><span class="project-year">2020</span></div>
-        <h3>JBL &amp; Harman-Kardon</h3>
-        <p class="desc">Short one or two line description of the project, the problem it solved, and your role in it.</p>
-        <div class="skill-chips">
-          <span class="chip">Skill</span><span class="chip">Skill</span><span class="chip">Skill</span>
+    <article class="project pair" id="p2019" data-year="2019">
+      <div class="pair-grid">
+        <div class="pair-card">
+          <div class="pair-visual">
+            <img src="https://raw.githubusercontent.com/amything/my-portfolio/main/jbl.png" alt="JBL campaign artwork">
+          </div>
+          <div class="tag-row"><span class="tag">Campaign</span><span class="project-year">2019</span></div>
+          <h3>JBL</h3>
+          <p class="desc">Product campaign design for JBL — dynamic, high-energy visuals built for social and retail.</p>
+          <div class="skill-chips">
+            <span class="chip">Art Direction</span><span class="chip">Campaign Design</span><span class="chip">Social &amp; Retail</span>
+          </div>
+        </div>
+        <div class="pair-card">
+          <div class="pair-visual">
+            <img src="https://raw.githubusercontent.com/amything/my-portfolio/main/HK%20cover.png" alt="Harman Kardon campaign cover">
+          </div>
+          <div class="tag-row"><span class="tag">Campaign</span><span class="project-year">2019</span></div>
+          <h3>Harman Kardon</h3>
+          <p class="desc">Brand campaign for Harman Kardon — a refined, premium visual language for a sound-first identity.</p>
+          <div class="skill-chips">
+            <span class="chip">Art Direction</span><span class="chip">Brand Identity</span><span class="chip">Campaign Design</span>
+          </div>
         </div>
       </div>
     </article>
 
-    <article class="project" id="p2018" data-year="2018">
-      <div class="project-visual">
-        <img src="https://raw.githubusercontent.com/amything/my-portfolio/main/JBL%20(1).png" alt="Sterling Holidays — JBL">
-      </div>
-      <div class="project-info">
-        <div class="tag-row"><span class="tag">Project title</span><span class="project-year">2018</span></div>
-        <h3>Sterling Holidays</h3>
-        <p class="desc">Short one or two line description of the project, the problem it solved, and your role in it.</p>
-        <div class="skill-chips">
-          <span class="chip">Skill</span><span class="chip">Skill</span><span class="chip">Skill</span>
+    <article class="project pair" id="p2018" data-year="2018">
+      <div class="pair-grid">
+        <div class="pair-card">
+          <div class="pair-visual">
+            <img src="https://raw.githubusercontent.com/amything/my-portfolio/main/Surfers%20Paradise.jpg" alt="Sterling Holidays — Surfers Paradise campaign">
+          </div>
+          <div class="tag-row"><span class="tag">Campaign</span><span class="project-year">2018</span></div>
+          <h3>Sterling Holidays</h3>
+          <p class="desc">Campaign creative for a travel &amp; holidays brand — visual storytelling across print and digital touchpoints.</p>
+          <div class="skill-chips">
+            <span class="chip">Art Direction</span><span class="chip">Campaign Design</span><span class="chip">Print &amp; Digital</span>
+          </div>
+        </div>
+        <div class="pair-card">
+          <div class="pair-visual">
+            <img src="https://raw.githubusercontent.com/amything/my-portfolio/main/Urban%20Cruiser.png" alt="Toyota Urban Landcruiser campaign">
+          </div>
+          <div class="tag-row"><span class="tag">Campaign</span><span class="project-year">2018</span></div>
+          <h3>Toyota Urban Landcruiser</h3>
+          <p class="desc">Automotive campaign artwork for the Urban Landcruiser — bold, adventure-led visual direction.</p>
+          <div class="skill-chips">
+            <span class="chip">Art Direction</span><span class="chip">Campaign Design</span><span class="chip">Brand Identity</span>
+          </div>
         </div>
       </div>
     </article>
