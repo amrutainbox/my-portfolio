@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PSP Dashboard — Amruta J</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  @font-face{
+    font-family:'Bricolage Grotesque Condensed';
+    src: url('BricolageGrotesque48ptCondensed-SemiBold.ttf') format('truetype');
+    font-weight:600;
+    font-style:normal;
+    font-display:swap;
+  }
+  :root{
+    --bg: #FAFAFA;
+    --surface: #FFFFFF;
+    --surface-2: #F1F0EE;
+    --heading: #1D1D1D;
+    --body-text: #4A4948;
+    --text-faint: #8C8B89;
+    --coral: #FF5C4D;
+    --coral-dim: rgba(255,92,77,0.12);
+    --cobalt: #3E5CE0;
+    --cobalt-dim: rgba(62,92,224,0.10);
+    --green: #3DAE6E;
+    --line: rgba(29,29,29,0.09);
+    --font-heading: 'Bricolage Grotesque Condensed', 'Bricolage Grotesque', 'Inter', sans-serif;
+    --font-body: 'Inter', sans-serif;
+    --h1: 56px; --h2: 42px; --h3: 30px; --h4: 24px; --h5: 18px;
+    --p1: 22px; --p2: 16px; --p3: 14px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg); color:var(--body-text);
+    font-family:var(--font-body); font-size:var(--p2); line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    cursor: url('coffee-cursor.svg') 4 12, auto;
+  }
+  a, button{ cursor: url('coffee-cursor.svg') 4 12, pointer; }
+  a{ color:inherit; text-decoration:none; }
+  h1,h2,h3,h4{ font-family:var(--font-heading); font-weight:600; color:var(--heading); line-height:1.18; letter-spacing:0.005em; }
+  ::selection{ background:var(--coral); color:#fff; }
+
+  .wrap{ max-width:920px; margin:0 auto; padding:0 8vw; }
+
+  /* ---------- Nav ---------- */
+  .topnav{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:2.5rem 8vw 0;
+  }
+  .logo-text{ font-family:var(--font-heading); font-size:26px; font-weight:600; color:var(--coral); }
+  .topnav nav a{ font-size:16px; font-weight:500; color:var(--heading); border-bottom:1px solid transparent; }
+  .topnav nav a:hover{ border-color:var(--coral); color:var(--coral); }
+
+  /* ---------- Hero ---------- */
+  .cs-hero{ max-width:920px; margin:0 auto; padding:4.5rem 8vw 2.5rem; }
+  .tag-label{
+    display:inline-block; font-size:13px; font-weight:600; color:var(--coral);
+    text-transform:uppercase; letter-spacing:0.06em; margin-bottom:1.1rem;
+  }
+  .cs-hero h1{ font-size:clamp(2rem, 4.6vw, var(--h1)); max-width:20ch; margin-bottom:1.1rem; }
+  .cs-hero .subhead{ font-size:var(--p1); color:var(--body-text); max-width:52ch; }
+
+  .meta-grid{
+    max-width:920px; margin:2.8rem auto 0; padding:0 8vw;
+    display:grid; grid-template-columns:repeat(5, 1fr); gap:1.5rem;
+    border-top:1px solid var(--line); border-bottom:1px solid var(--line);
+    padding-top:1.8rem; padding-bottom:1.8rem;
+  }
+  .meta-grid .m-label{ font-size:12px; font-weight:600; color:var(--text-faint); text-transform:uppercase; letter-spacing:0.05em; margin-bottom:0.5rem; }
+  .meta-grid .m-val{ font-size:14.5px; color:var(--heading); font-weight:500; line-height:1.5; }
+
+  /* ---------- Hero visual: dashboard mockup ---------- */
+  .hero-visual{ max-width:920px; margin:3.2rem auto 0.8rem; padding:0 8vw; }
+  .browser-mock{
+    background:var(--surface); border:1px solid var(--line); border-radius:14px;
+    overflow:hidden; box-shadow:0 20px 50px rgba(29,29,29,0.08);
+  }
+  .browser-mock .bar{
+    display:flex; align-items:center; gap:6px;
+    padding:0.8rem 1rem; border-bottom:1px solid var(--line); background:var(--surface-2);
+  }
+  .browser-mock .bar span{ width:9px; height:9px; border-radius:50%; background:var(--line); }
+  .dash-zones{ display:grid; grid-template-columns:1fr 1fr 1fr; gap:1px; background:var(--line); }
+  .dash-zone{ background:var(--surface); padding:2.2rem 1.3rem; text-align:center; position:relative; }
+  .dash-zone .zone-label{
+    display:inline-block; font-size:12px; font-weight:600; letter-spacing:0.04em; text-transform:uppercase;
+    padding:0.3rem 0.7rem; border-radius:20px; margin-bottom:0.9rem;
+  }
+  .dash-zone.work .zone-label{ background:var(--coral-dim); color:var(--coral); }
+  .dash-zone.growth .zone-label{ background:var(--cobalt-dim); color:var(--cobalt); }
+  .dash-zone.support .zone-label{ background:rgba(61,174,110,0.12); color:var(--green); }
+  .dash-zone .zone-lines{ display:flex; flex-direction:column; gap:0.5rem; margin-top:0.4rem; }
+  .dash-zone .zone-lines i{ display:block; height:8px; border-radius:4px; background:var(--surface-2); }
+  .dash-zone .zone-lines i:nth-child(1){ width:85%; }
+  .dash-zone .zone-lines i:nth-child(2){ width:60%; }
+  .dash-zone .zone-lines i:nth-child(3){ width:72%; }
+  .visual-caption{
+    text-align:center; font-size:14px; color:var(--text-faint); margin-top:1rem; max-width:56ch;
+    margin-left:auto; margin-right:auto;
+  }
+
+  /* ---------- Section rhythm ---------- */
+  section.cs-block{ max-width:920px; margin:0 auto; padding:4.2rem 8vw; }
+  section.cs-block.tight{ padding-top:0; }
+  .cs-block h2{ font-size:var(--h3); margin-bottom:1.2rem; }
+  .cs-block .kicker{ font-size:13px; font-weight:600; color:var(--coral); text-transform:uppercase; letter-spacing:0.06em; margin-bottom:0.7rem; }
+  .cs-block p{ font-size:var(--p2); color:var(--body-text); max-width:66ch; margin-bottom:1rem; }
+  .cs-block p:last-child{ margin-bottom:0; }
+  .cs-block ul{ margin:1rem 0 0; padding-left:1.2rem; max-width:62ch; }
+  .cs-block ul li{ font-size:var(--p2); color:var(--body-text); margin-bottom:0.5rem; }
+  .divider{ border:none; border-top:1px solid var(--line); max-width:920px; margin:0 auto; }
+
+  /* ---------- Problem diagram ---------- */
+  .scatter-wrap{
+    background:var(--surface); border:1px solid var(--line); border-radius:14px;
+    padding:2.6rem 1.5rem 2.2rem; margin-top:1.6rem;
+  }
+  .scatter-chips{
+    display:flex; flex-wrap:wrap; justify-content:center; gap:0.6rem;
+    max-width:640px; margin:0 auto 1.6rem;
+  }
+  .scatter-chips span{
+    font-size:13px; font-weight:500; color:var(--body-text);
+    background:var(--surface-2); border:1px solid var(--line);
+    padding:0.4rem 0.9rem; border-radius:20px;
+  }
+  .scatter-arrow{ display:flex; justify-content:center; margin:0.6rem 0; color:var(--text-faint); }
+  .messy-box{
+    max-width:280px; margin:0 auto; text-align:center;
+    background:var(--surface-2); border:1.5px dashed var(--line);
+    border-radius:12px; padding:1.4rem 1rem;
+    font-size:13.5px; color:var(--text-faint); font-weight:500;
+  }
+
+  /* ---------- Reframe before/after ---------- */
+  .reframe-grid{
+    display:grid; grid-template-columns:1fr auto 1fr; gap:1.4rem; align-items:center;
+    margin-top:1.6rem;
+  }
+  .reframe-card{
+    border-radius:14px; padding:2.2rem 1.6rem; text-align:center;
+  }
+  .reframe-card.before{ background:var(--surface-2); border:1px solid var(--line); }
+  .reframe-card.after{ background:var(--heading); border:1px solid var(--heading); }
+  .reframe-card .rf-tag{ font-size:12px; font-weight:600; text-transform:uppercase; letter-spacing:0.06em; margin-bottom:0.9rem; display:block; }
+  .reframe-card.before .rf-tag{ color:var(--text-faint); }
+  .reframe-card.after .rf-tag{ color:var(--coral); }
+  .reframe-card .rf-text{ font-family:var(--font-heading); font-size:22px; font-weight:600; }
+  .reframe-card.before .rf-text{ color:var(--heading); }
+  .reframe-card.after .rf-text{ color:#fff; }
+  .reframe-arrow{ color:var(--coral); }
+  @media (max-width:640px){
+    .reframe-grid{ grid-template-columns:1fr; }
+    .reframe-arrow{ transform:rotate(90deg); justify-self:center; }
+  }
+
+  /* ---------- Insight cards ---------- */
+  .insight-grid{ display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin-top:1.6rem; }
+  .insight-card{
+    background:var(--surface); border:1px solid var(--line); border-radius:12px;
+    padding:1.5rem 1.4rem;
+  }
+  .insight-card .n{ font-family:var(--font-heading); font-size:22px; color:var(--coral); margin-bottom:0.6rem; }
+  .insight-card .t{ font-size:15px; font-weight:600; color:var(--heading); }
+  @media (max-width:640px){ .insight-grid{ grid-template-columns:1fr; } }
+
+  /* ---------- IA diagram ---------- */
+  .ia-grid{ display:grid; grid-template-columns:1fr 1fr 1fr; gap:1.1rem; margin-top:1.6rem; }
+  .ia-pillar{
+    background:var(--surface); border:1px solid var(--line); border-radius:14px;
+    padding:1.6rem 1.3rem; text-align:center;
+  }
+  .ia-pillar .ia-dot{ width:34px; height:34px; border-radius:50%; margin:0 auto 0.9rem; display:flex; align-items:center; justify-content:center; font-family:var(--font-heading); font-weight:600; font-size:14px; color:#fff; }
+  .ia-pillar.work .ia-dot{ background:var(--coral); }
+  .ia-pillar.growth .ia-dot{ background:var(--cobalt); }
+  .ia-pillar.support .ia-dot{ background:var(--green); }
+  .ia-pillar h4{ font-size:17px; margin-bottom:0.7rem; }
+  .ia-pillar ul{ list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:0.35rem; }
+  .ia-pillar ul li{ font-size:13px; color:var(--text-faint); margin:0; }
+  @media (max-width:640px){ .ia-grid{ grid-template-columns:1fr; } }
+
+  /* ---------- Rhythm timeline ---------- */
+  .rhythm-row{ display:grid; grid-template-columns:1fr 1fr 1fr; gap:1rem; margin-top:1.8rem; position:relative; }
+  .rhythm-row::before{
+    content:''; position:absolute; top:17px; left:8%; right:8%; height:2px; background:var(--line); z-index:0;
+  }
+  .rhythm-step{ position:relative; z-index:1; text-align:center; }
+  .rhythm-step .r-dot{ width:34px; height:34px; border-radius:50%; background:var(--coral); margin:0 auto 0.9rem; }
+  .rhythm-step .r-label{ font-family:var(--font-heading); font-size:16px; font-weight:600; color:var(--heading); margin-bottom:0.5rem; }
+  .rhythm-step .r-items{ font-size:13px; color:var(--text-faint); }
+  @media (max-width:640px){
+    .rhythm-row{ grid-template-columns:1fr; gap:1.6rem; }
+    .rhythm-row::before{ display:none; }
+  }
+
+  /* ---------- SUS score card ---------- */
+  .sus-card{
+    background:var(--surface); border:1px solid var(--line); border-radius:16px;
+    padding:2rem; margin-top:1.6rem;
+    display:grid; grid-template-columns:auto 1fr; gap:2.2rem; align-items:center;
+  }
+  .sus-meter{ position:relative; width:140px; height:140px; }
+  .sus-meter svg{ width:100%; height:100%; transform:rotate(-90deg); }
+  .sus-meter .track{ fill:none; stroke:var(--surface-2); stroke-width:10; }
+  .sus-meter .fill{ fill:none; stroke:var(--coral); stroke-width:10; stroke-linecap:round; }
+  .sus-meter .sus-num{ position:absolute; inset:0; display:flex; align-items:center; justify-content:center; flex-direction:column; }
+  .sus-meter .sus-num b{ font-family:var(--font-heading); font-size:32px; color:var(--heading); }
+  .sus-meter .sus-num span{ font-size:11px; color:var(--text-faint); text-transform:uppercase; letter-spacing:0.05em; }
+  .sus-facts{ display:flex; flex-direction:column; gap:0.7rem; }
+  .sus-facts .f-row{ display:flex; justify-content:space-between; gap:1rem; font-size:14.5px; border-bottom:1px solid var(--line); padding-bottom:0.6rem; }
+  .sus-facts .f-row:last-child{ border-bottom:none; padding-bottom:0; }
+  .sus-facts .f-row .f-label{ color:var(--text-faint); }
+  .sus-facts .f-row .f-val{ color:var(--heading); font-weight:600; }
+  @media (max-width:640px){ .sus-card{ grid-template-columns:1fr; justify-items:center; text-align:center; } }
+
+  /* ---------- Component board ---------- */
+  .component-board{ display:flex; flex-wrap:wrap; gap:0.6rem; margin-top:1.6rem; }
+  .component-board span{
+    font-size:13px; font-weight:500; color:var(--heading);
+    background:var(--surface); border:1px solid var(--line); border-radius:8px;
+    padding:0.55rem 0.9rem;
+  }
+
+  /* ---------- What changed table ---------- */
+  .changed-table{ margin-top:1.6rem; border:1px solid var(--line); border-radius:12px; overflow:hidden; }
+  .changed-row{ display:grid; grid-template-columns:1fr 1fr; }
+  .changed-row + .changed-row{ border-top:1px solid var(--line); }
+  .changed-row .c-before, .changed-row .c-after{ padding:1rem 1.2rem; font-size:14px; }
+  .changed-row .c-before{ color:var(--text-faint); border-right:1px solid var(--line); }
+  .changed-row .c-after{ color:var(--heading); font-weight:500; background:var(--coral-dim); }
+  .changed-head{ display:grid; grid-template-columns:1fr 1fr; background:var(--surface-2); }
+  .changed-head div{ padding:0.8rem 1.2rem; font-size:12px; font-weight:600; text-transform:uppercase; letter-spacing:0.05em; color:var(--text-faint); }
+  .changed-head div:first-child{ border-right:1px solid var(--line); }
+  @media (max-width:640px){ .changed-row .c-before{ border-right:none; border-bottom:1px solid var(--line); } .changed-row{ grid-template-columns:1fr; } .changed-head{ grid-template-columns:1fr; } .changed-head div:first-child{ border-right:none; } }
+
+  /* ---------- Outcome tiles ---------- */
+  .outcome-grid{ display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin-top:1.6rem; }
+  .outcome-tile{
+    background:var(--heading); border-radius:14px; padding:1.6rem 1.4rem; color:#fff;
+  }
+  .outcome-tile .o-num{ font-family:var(--font-heading); font-size:26px; color:var(--coral); margin-bottom:0.5rem; }
+  .outcome-tile .o-text{ font-size:14.5px; color:#EDEDED; }
+  @media (max-width:640px){ .outcome-grid{ grid-template-columns:1fr; } }
+
+  /* ---------- Gamification before/after ---------- */
+  .gami-grid{ display:grid; grid-template-columns:1fr 1fr; gap:1.1rem; margin-top:1.6rem; }
+  .gami-card{ border-radius:14px; padding:1.6rem 1.4rem; border:1px solid var(--line); }
+  .gami-card.early{ background:var(--surface-2); }
+  .gami-card.refined{ background:var(--coral-dim); border-color:transparent; }
+  .gami-card .g-tag{ font-size:12px; font-weight:600; text-transform:uppercase; letter-spacing:0.05em; margin-bottom:0.6rem; display:block; }
+  .gami-card.early .g-tag{ color:var(--text-faint); }
+  .gami-card.refined .g-tag{ color:var(--coral); }
+  .gami-card .g-text{ font-size:15px; color:var(--heading); font-weight:500; }
+  @media (max-width:640px){ .gami-grid{ grid-template-columns:1fr; } }
+
+  /* ---------- Pull quote ---------- */
+  .pull-quote{
+    max-width:920px; margin:0 auto; padding:4.2rem 8vw;
+    font-family:var(--font-heading); font-size:clamp(1.4rem, 2.6vw, var(--h3));
+    color:var(--heading); line-height:1.4; text-align:center;
+  }
+
+  /* ---------- Footer nav ---------- */
+  .cs-footer{
+    max-width:920px; margin:0 auto; padding:3rem 8vw 5rem;
+    display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1.5rem;
+    border-top:1px solid var(--line);
+  }
+  .cs-footer .back-link{ font-size:15px; font-weight:500; color:var(--heading); }
+  .cs-footer .back-link:hover{ color:var(--coral); }
+  .cs-footer .contact-email{ font-size:15px; font-weight:600; color:var(--coral); }
+</style>
+</head>
+<body>
+
+<div class="topnav">
+  <a class="logo-text" href="index.html">Amruta J</a>
+  <nav><a href="index.html">← Back to portfolio</a></nav>
+</div>
+
+<div class="cs-hero">
+  <span class="tag-label">Product Design · UX Research · 2024</span>
+  <h1>Turning an Internal Dashboard into an Employee Growth Hub</h1>
+  <p class="subhead">Designing a personalised workplace platform for visibility, recognition, and career growth.</p>
+</div>
+
+<div class="meta-grid">
+  <div><div class="m-label">Role</div><div class="m-val">Product Designer<br>UX Researcher<br>UI Designer</div></div>
+  <div><div class="m-label">Timeline</div><div class="m-val">6 weeks</div></div>
+  <div><div class="m-label">Tools</div><div class="m-val">Figma<br>Miro<br>InVision</div></div>
+  <div><div class="m-label">Team</div><div class="m-val">3 UX Designers<br>2 Product Owners<br>1 Front-End Dev</div></div>
+  <div><div class="m-label">Stage</div><div class="m-val">Concept-stage<br>Mid-fidelity, user-tested</div></div>
+</div>
+
+<div class="hero-visual">
+  <div class="browser-mock">
+    <div class="bar"><span></span><span></span><span></span></div>
+    <div class="dash-zones">
+      <div class="dash-zone work">
+        <span class="zone-label">Work</span>
+        <div class="zone-lines"><i></i><i></i><i></i></div>
+      </div>
+      <div class="dash-zone growth">
+        <span class="zone-label">Growth</span>
+        <div class="zone-lines"><i></i><i></i><i></i></div>
+      </div>
+      <div class="dash-zone support">
+        <span class="zone-label">Support</span>
+        <div class="zone-lines"><i></i><i></i><i></i></div>
+      </div>
+    </div>
+  </div>
+  <p class="visual-caption">An internal employee dashboard redesigned around daily work visibility, career growth, and support.</p>
+</div>
+
+<section class="cs-block">
+  <span class="kicker">Overview</span>
+  <p>PSP was a 6-week product design project exploring how an internal employee platform could better support visibility, motivation, and career growth across a growing organisation.</p>
+  <p>The initial brief was to design a dashboard for I.E. employees. But through research synthesis, competitor analysis, and usability testing, the opportunity became clearer: employees did not just need another place to access tools. They needed a more personalised workspace that helped them understand what to focus on, track their progress, access support, and feel recognised for their contribution.</p>
+  <p>The final concept reimagined PSP as an employee growth hub, bringing together project updates, calendar visibility, learning resources, HR access, performance indicators, and recognition features into one flexible dashboard experience.</p>
+</section>
+
+<hr class="divider">
+
+<section class="cs-block">
+  <span class="kicker">The Challenge</span>
+  <h2>Everyday needs, scattered across too many places</h2>
+  <p>I.E. employees needed to access information across multiple areas of work — projects, HR, learning, performance, communication, and internal opportunities. These needs were spread across different touchpoints, making it harder for employees to quickly understand:</p>
+  <ul>
+    <li>What needs attention today</li>
+    <li>Where current projects stand</li>
+    <li>What learning or career opportunities are available</li>
+    <li>How their progress is being recognised</li>
+    <li>Where to find support when they need it</li>
+  </ul>
+  <p>The risk was designing a dashboard that simply displayed more information without helping employees make sense of it.</p>
+
+  <div class="scatter-wrap">
+    <div class="scatter-chips">
+      <span>Projects</span><span>Calendar</span><span>HR</span><span>Learning</span>
+      <span>Recognition</span><span>Payroll</span><span>Opportunities</span><span>Team updates</span>
+    </div>
+    <div class="scatter-arrow">
+      <svg width="20" height="24" viewBox="0 0 20 24" fill="none"><path d="M10 0v20M2 14l8 8 8-8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </div>
+    <div class="messy-box">One disconnected, hard-to-parse employee experience</div>
+  </div>
+  <p class="visual-caption">Employees had to move between disconnected touchpoints to understand work, growth, and support needs.</p>
+
+  <p style="margin-top:1.8rem;"><b style="color:var(--heading);">The design challenge became:</b> how do we create an internal platform that feels useful enough to become part of an employee's everyday workflow?</p>
+</section>
+
+<hr class="divider">
+
+<section class="cs-block">
+  <span class="kicker">The Reframe</span>
+  <h2>From a dashboard of tools to a growth hub</h2>
+  <p>The first instinct was to organise workplace tools into a cleaner dashboard. But the research pointed to a deeper need — employees did not just want access to information, they wanted clarity, relevance, and a stronger sense of progress.</p>
+
+  <div class="reframe-grid">
+    <div class="reframe-card before">
+      <span class="rf-tag">Before</span>
+      <div class="rf-text">A dashboard of workplace tools</div>
+    </div>
+    <div class="reframe-arrow">
+      <svg width="28" height="20" viewBox="0 0 28 20" fill="none"><path d="M0 10h24M16 2l8 8-8 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </div>
+    <div class="reframe-card after">
+      <span class="rf-tag">After</span>
+      <div class="rf-text">A personalised employee growth hub</div>
+    </div>
+  </div>
+  <p class="visual-caption">The product direction shifted from organising tools to guiding employees through work, growth, and support.</p>
+
+  <p style="margin-top:1.8rem;">This changed the design direction. Instead of treating every feature equally, we organised the experience around employee behaviour: what they need daily, what they review weekly, and what supports their long-term growth.</p>
+</section>
+
+<hr class="divider">
+
+<section class="cs-block">
+  <span class="kicker">Research Approach</span>
+  <p>Due to limited access to I.E. employees during the project timeline, we used existing research provided by I.E. and supplemented it with interviews from employees working in similar organisational environments.</p>
+  <p>The goal was to understand how employees use internal tools, what information they need most often, and what makes workplace dashboards feel useful or ignored. We synthesised the research into recurring themes and used these insights to guide the dashboard structure, feature priority, and interaction model.</p>
+
+  <div class="insight-grid">
+    <div class="insight-card"><div class="n">01</div><div class="t">One central place for work visibility</div></div>
+    <div class="insight-card"><div class="n">02</div><div class="t">Daily-use tools needed priority</div></div>
+    <div class="insight-card"><div class="n">03</div><div class="t">Personalisation increased relevance</div></div>
+    <div class="insight-card"><div class="n">04</div><div class="t">Recognition needed to feel supportive</div></div>
+  </div>
+  <p class="visual-caption">Research themes helped prioritise the dashboard structure and interaction model.</p>
+</section>
+
+<hr class="divider">
+
+<section class="cs-block">
+  <span class="kicker">Product Direction</span>
+  <h2>Three pillars, one mental model</h2>
+  <p>Based on the research, we structured PSP around three core areas — simplifying the mental model of the dashboard so employees weren't searching through disconnected sections, but guided by what they were trying to do.</p>
+
+  <div class="ia-grid">
+    <div class="ia-pillar work">
+      <div class="ia-dot">W</div>
+      <h4>Work</h4>
+      <ul><li>Current projects</li><li>Calendar</li><li>Tasks</li><li>Team updates</li></ul>
+    </div>
+    <div class="ia-pillar growth">
+      <div class="ia-dot">G</div>
+      <h4>Growth</h4>
+      <ul><li>Learning resources</li><li>Goals</li><li>Achievements</li><li>Career opportunities</li></ul>
+    </div>
+    <div class="ia-pillar support">
+      <div class="ia-dot">S</div>
+      <h4>Support</h4>
+      <ul><li>HR</li><li>Payroll</li><li>Policies</li><li>Employee resources</li></ul>
+    </div>
+  </div>
+  <p class="visual-caption">The information architecture was simplified into three clear areas: Work, Growth, and Support.</p>
+</section>
+
+<hr class="divider">
+
+<section class="cs-block">
+  <span class="kicker">Designing the Experience</span>
+  <h2>Built around workplace rhythms, not departments</h2>
+  <p>The dashboard was designed around how often employees actually needed each piece of information — prioritising the interface so the most frequent actions appeared first, while lower-frequency resources were still easy to find.</p>
+
+  <div class="rhythm-row">
+    <div class="rhythm-step">
+      <div class="r-dot"></div>
+      <div class="r-label">Daily</div>
+      <div class="r-items">Calendar, projects, updates</div>
+    </div>
+    <div class="rhythm-step">
+      <div class="r-dot"></div>
+      <div class="r-label">Weekly</div>
+      <div class="r-items">Learning, goals, time tracking</div>
+    </div>
+    <div class="rhythm-step">
+      <div class="r-dot"></div>
+      <div class="r-label">Monthly</div>
+      <div class="r-items">HR, payroll, performance, career growth</div>
+    </div>
+  </div>
+  <p class="visual-caption">The dashboard was structured around employee rhythms rather than department categories.</p>
+</section>
+
+<hr class="divider">
+
+<section class="cs-block">
+  <span class="kicker">Prototype</span>
+  <p>We built a mid-fidelity prototype in Figma to test the structure, navigation, and feature hierarchy. The focus at this stage wasn't final visual design — it was testing whether users understood the structure, could find key information, and saw value in the concept.</p>
+  <ul>
+    <li>A personalised dashboard homepage</li>
+    <li>Customisable dashboard tiles</li>
+    <li>Current project cards &amp; calendar visibility</li>
+    <li>Learning and career sections</li>
+    <li>HR and payroll access</li>
+    <li>Goals, achievements, and recognition features</li>
+    <li>Navigation across Work, Growth, and Support</li>
+  </ul>
+</section>
+
+<hr class="divider">
+
+<section class="cs-block">
+  <span class="kicker">Usability Testing</span>
+  <p>We tested the prototype with five participants over Zoom, who shared their screens while exploring the dashboard and completing key tasks. We observed how easily they could understand the homepage, find projects and calendar information, locate HR and learning resources, react to recognition features, and move between key sections — and asked how they'd arrange the dashboard around their own work habits.</p>
+
+  <h2 style="margin-top:2.2rem;">What we learned</h2>
+  <ul>
+    <li><b style="color:var(--heading);">Customisation needed clearer cues</b> — users liked rearranging tiles, but the interface needed stronger signals that sections were editable.</li>
+    <li><b style="color:var(--heading);">Calendar and projects needed to sit higher</b> — these were expected to be visible immediately as the most practical daily-use features.</li>
+    <li><b style="color:var(--heading);">Gamification couldn't be the main driver</b> — some users liked badges and progress, others found them pressuring, so we scaled the emphasis back.</li>
+  </ul>
+
+  <div class="sus-card">
+    <div class="sus-meter">
+      <svg viewBox="0 0 140 140">
+        <circle class="track" cx="70" cy="70" r="60"/>
+        <circle class="fill" cx="70" cy="70" r="60" stroke-dasharray="377" stroke-dashoffset="79.2"/>
+      </svg>
+      <div class="sus-num"><b>79</b><span>SUS Score</span></div>
+    </div>
+    <div class="sus-facts">
+      <div class="f-row"><span class="f-label">Participants</span><span class="f-val">5</span></div>
+      <div class="f-row"><span class="f-label">SUS score</span><span class="f-val">79</span></div>
+      <div class="f-row"><span class="f-label">Industry benchmark</span><span class="f-val">68</span></div>
+      <div class="f-row"><span class="f-label">Key validation</span><span class="f-val">Structure was understandable and useful</span></div>
+    </div>
+  </div>
+  <p class="visual-caption">The mid-fidelity prototype achieved a SUS score of 79, above the standard benchmark of 68 — suggesting strong usability potential at concept stage.</p>
+</section>
+
+<hr class="divider">
+
+<section class="cs-block">
+  <span class="kicker">Design Iterations</span>
+  <p>Based on testing, we made several refinements:</p>
+  <ul>
+    <li>Moved calendar and current projects higher on the dashboard</li>
+    <li>Improved the visual hierarchy of key tiles</li>
+    <li>Made dashboard customisation more obvious</li>
+    <li>Reduced the dominance of badges and goal tracking</li>
+    <li>Clarified section labels across Work, Growth, and Support</li>
+    <li>Started building reusable components for consistency</li>
+  </ul>
+</section>
+
+<hr class="divider">
+
+<section class="cs-block">
+  <span class="kicker">What Didn't Work</span>
+  <h2>Gamification as the main motivator</h2>
+  <p>One early direction placed too much emphasis on gamification — badges, goal trackers, and achievement-based motivation as a prominent part of the dashboard. While some users found these features motivating, others felt they could create pressure or make the platform feel like a monitoring tool.</p>
+
+  <div class="gami-grid">
+    <div class="gami-card early">
+      <span class="g-tag">Early idea</span>
+      <div class="g-text">Badges and goals as the main motivation</div>
+    </div>
+    <div class="gami-card refined">
+      <span class="g-tag">Refined idea</span>
+      <div class="g-text">Recognition made optional and user-controlled</div>
+    </div>
+  </div>
+  <p class="visual-caption">Testing showed that recognition should support employees without making them feel monitored.</p>
+</section>
+
+<hr class="divider">
+
+<section class="cs-block">
+  <span class="kicker">Design System Foundation</span>
+  <p>Alongside the prototype, we began building a simple design system to support consistency and future scalability as new features and employee groups were added.</p>
+  <div class="component-board">
+    <span>Dashboard cards</span><span>Navigation</span><span>Tile layouts</span><span>Buttons</span>
+    <span>Progress indicators</span><span>Status labels</span><span>Typography</span><span>Spacing</span>
+    <span>Icon usage</span><span>Reusable patterns</span>
+  </div>
+  <p class="visual-caption">Reusable components created a foundation for future dashboard expansion.</p>
+</section>
+
+<hr class="divider">
+
+<section class="cs-block">
+  <span class="kicker">What Changed</span>
+  <div class="changed-table">
+    <div class="changed-head"><div>Before</div><div>After</div></div>
+    <div class="changed-row"><div class="c-before">Dashboard structured around separate tools</div><div class="c-after">Structured around Work, Growth, and Support</div></div>
+    <div class="changed-row"><div class="c-before">Equal priority given to most features</div><div class="c-after">Daily-use tools prioritised on the homepage</div></div>
+    <div class="changed-row"><div class="c-before">Static dashboard layout</div><div class="c-after">Customisable tile-based experience</div></div>
+    <div class="changed-row"><div class="c-before">Recognition as a central motivation feature</div><div class="c-after">Recognition made flexible and user-controlled</div></div>
+    <div class="changed-row"><div class="c-before">HR, learning, and projects felt disconnected</div><div class="c-after">Key resources brought into one guided experience</div></div>
+    <div class="changed-row"><div class="c-before">UI patterns designed screen by screen</div><div class="c-after">Reusable component foundation introduced</div></div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<section class="cs-block">
+  <span class="kicker">Outcome</span>
+  <p>The project resulted in a tested mid-fidelity prototype and a clearer product direction for PSP. Because the project was concept-stage, success was evaluated through usability testing, participant feedback, and the clarity of the product direction rather than live business performance.</p>
+  <div class="outcome-grid">
+    <div class="outcome-tile"><div class="o-num">01</div><div class="o-text">Simplified information architecture</div></div>
+    <div class="outcome-tile"><div class="o-num">02</div><div class="o-text">Personalised dashboard homepage concept</div></div>
+    <div class="outcome-tile"><div class="o-num">03</div><div class="o-text">Customisable tile system</div></div>
+    <div class="outcome-tile"><div class="o-num">04</div><div class="o-text">Early design system foundation</div></div>
+  </div>
+  <p class="visual-caption">Validated through 5-user usability testing and a SUS score of 79.</p>
+</section>
+
+<hr class="divider">
+
+<section class="cs-block">
+  <span class="kicker">What I Learned</span>
+  <p>This project reinforced that dashboards shouldn't simply display information — a strong dashboard helps users understand what matters, what needs attention, and what action to take next.</p>
+  <p>It also showed that employee experience design requires care. Business visibility is important, but employees also need trust, flexibility, and control over how their progress is shown. The biggest learning was that motivation features only work when they feel supportive — recognition, goals, and progress indicators need to encourage employees without creating pressure or comparison.</p>
+</section>
+
+<hr class="divider">
+
+<section class="cs-block">
+  <span class="kicker">Next Steps</span>
+  <p>The next step would be to test the prototype with actual I.E. employees across full-time, part-time, remote, and contract roles. Future improvements could include:</p>
+  <ul>
+    <li>High-fidelity visual design</li>
+    <li>More advanced dashboard personalisation</li>
+    <li>Improved tile movement and editing controls</li>
+    <li>Integration with workplace tools</li>
+    <li>More detailed learning and career pathways</li>
+    <li>Manager and HR views</li>
+    <li>Accessibility testing</li>
+    <li>Expanded design system documentation</li>
+  </ul>
+  <p style="margin-top:1.2rem;">The long-term opportunity is to evolve PSP into a scalable internal platform that can support different employee types, workplace structures, and organisational needs.</p>
+</section>
+
+<div class="pull-quote">
+  "The concept evolved from a static dashboard into a personalised employee growth hub — tested, validated, and built to scale."
+</div>
+
+<footer class="cs-footer">
+  <a class="back-link" href="index.html">← Back to portfolio</a>
+  <a class="contact-email" href="mailto:amruta.inbox@gmail.com">amruta.inbox@gmail.com</a>
+</footer>
+</body>
+</html>
