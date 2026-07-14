@@ -147,46 +147,30 @@
     background:var(--line);
   }
 
-  /* ---------- Radial cluster (A5 center, A1/A2/A3/A4/A6 orbit) ---------- */
-  .cluster-wrap{
-    width:100%;
-    aspect-ratio: 4 / 3;
-    position:relative;
-  }
-  .cluster-frame{
-    position:absolute;
-    top:50%; left:50%;
-    transform:translate(-50%,-50%);
-    border-radius:16px; overflow:hidden;
+  /* ---------- Creative grid: 2 up top, 3 below ---------- */
+  .card-frame{
+    border-radius:20px;
     border:1px solid var(--line);
-    background:var(--surface-2);
-    box-shadow:0 6px 20px rgba(29,29,29,0.06);
+    background:var(--surface);
+    box-shadow:0 10px 26px rgba(29,29,29,0.08), 0 2px 6px rgba(29,29,29,0.04);
+    padding:12px;
+    aspect-ratio:1/1;
+    transition:transform 0.25s ease, box-shadow 0.25s ease;
   }
-  .cluster-frame img{ width:100%; height:100%; object-fit:cover; display:block; }
-
-  .cluster-frame.center{
-    width:30%; aspect-ratio:1/1;
-    top:50%; left:50%;
-    z-index:3;
+  .card-frame img{
+    width:100%; height:100%;
+    object-fit:contain;
+    display:block;
+    border-radius:12px;
   }
-  .cluster-frame.orbit{
-    width:21%; aspect-ratio:1/1;
-    z-index:2;
+  .card-frame:hover{
+    transform:translateY(-4px);
+    box-shadow:0 16px 34px rgba(29,29,29,0.12), 0 4px 10px rgba(29,29,29,0.05);
   }
-  .cluster-frame.orbit.o1{ top:14%;   left:50%;   }
-  .cluster-frame.orbit.o2{ top:38.9%; left:84.2%; }
-  .cluster-frame.orbit.o3{ top:79.1%; left:71.2%; }
-  .cluster-frame.orbit.o4{ top:79.1%; left:28.8%; }
-  .cluster-frame.orbit.o6{ top:38.9%; left:15.8%; }
 
   @media (max-width: 720px){
     .grid-2{ grid-template-columns:1fr; }
     .grid-3{ grid-template-columns:1fr; }
-
-    .cluster-wrap{ aspect-ratio:auto; height:auto; }
-    .cluster-frame{ position:static; transform:none; width:100%; aspect-ratio:1/1; margin-bottom:1rem; }
-    .cluster-frame.center{ width:100%; }
-    .cluster-frame.orbit{ width:100%; }
   }
 
   footer{
@@ -232,13 +216,17 @@
   </div>
 
   <div class="block">
-    <div class="cluster-wrap">
-      <div class="cluster-frame center"><img src="A5.png" alt="JBL creative A5"></div>
-      <div class="cluster-frame orbit o1"><img src="A1.png" alt="JBL creative A1"></div>
-      <div class="cluster-frame orbit o2"><img src="A2.png" alt="JBL creative A2"></div>
-      <div class="cluster-frame orbit o3"><img src="A3.png" alt="JBL creative A3"></div>
-      <div class="cluster-frame orbit o4"><img src="A4.png" alt="JBL creative A4"></div>
-      <div class="cluster-frame orbit o6"><img src="A6.png" alt="JBL creative A6"></div>
+    <div class="grid-2">
+      <div class="card-frame"><img src="A1.png" alt="JBL creative A1"></div>
+      <div class="card-frame"><img src="A2.png" alt="JBL creative A2"></div>
+    </div>
+  </div>
+
+  <div class="block">
+    <div class="grid-3">
+      <div class="card-frame"><img src="A3.png" alt="JBL creative A3"></div>
+      <div class="card-frame"><img src="A4.png" alt="JBL creative A4"></div>
+      <div class="card-frame"><img src="A6.png" alt="JBL creative A6"></div>
     </div>
   </div>
 
@@ -256,7 +244,7 @@
 
   <div class="block">
     <div class="hero-shot">
-      <img src="JBL_S_4.png" alt="JBL campaign secondary hero visual">
+      <img src="JBL S 4.png" alt="JBL campaign secondary hero visual">
     </div>
   </div>
 
