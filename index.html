@@ -219,8 +219,8 @@
     display:flex;
     align-items:center;
     flex-wrap:nowrap;
-    gap:4.5rem;
-    padding-right:4.5rem;
+    gap:2.6rem;
+    padding-right:2.6rem;
     flex-shrink:0;
     animation:none;
   }
@@ -236,9 +236,9 @@
     flex:0 0 auto;
   }
   .clients img{
-    height:150px;
-    width:150px;
-    max-width:150px;
+    height:70px;
+    width:auto;
+    max-width:130px;
     object-fit:contain;
     opacity:0.75;
     filter:grayscale(100%);
@@ -262,9 +262,9 @@
     .clients:hover .clients-track{ animation-play-state:paused; }
     .clients-track[aria-hidden="true"]{ display:flex; }
     .clients img{
-      height:70px;
-      width:70px;
-      max-width:70px;
+      height:44px;
+      width:auto;
+      max-width:85px;
     }
   }
 
@@ -582,11 +582,9 @@
     .ruler-track{ flex-direction:row; gap:1.4rem; }
     .ruler-line, .ruler-fill{ display:none; }
     .ruler-item{ padding:0.3rem 0; flex-direction:column; gap:0.4rem; }
-    .project{ grid-template-columns:1fr; gap:1.5rem; }
+    .project{ grid-template-columns:1fr; gap:1.5rem; opacity:1 !important; transform:none !important; }
     .topnav{ padding:2rem 6vw 0; }
     .hero{ padding:4rem 6vw 3rem; }
-    .clients{ padding:2.5rem 6vw 3.5rem; gap:2rem 2.5rem; }
-    .clients img{ height:90px; width:90px; }
     .side-projects{ padding:3.5rem 6vw 4rem; }
     .side-project-frame iframe{ height:340px; }
     .testimonials{ padding:4.5rem 6vw; }
