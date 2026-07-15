@@ -423,6 +423,13 @@
     font-family:var(--font-body); color:var(--body-text); font-size:var(--p2);
     max-width:58ch; margin-bottom:2.4rem; line-height:1.7;
   }
+  .side-project{ margin-bottom:4.4rem; }
+  .side-project:last-child{ margin-bottom:0; }
+  .side-project-title{ font-size:var(--h4); margin:0 0 0.5rem; }
+  .side-project-desc{
+    font-family:var(--font-body); color:var(--body-text); font-size:var(--p2);
+    max-width:58ch; margin:0 0 1.4rem; line-height:1.7;
+  }
   .side-project-frame{
     position:relative;
     border-radius:20px;
@@ -761,14 +768,31 @@
 <section class="side-projects">
   <span class="tag-label">Side projects</span>
   <h2>A space to tinker</h2>
-  <p class="desc">I'm teaching myself to code and experimenting with new AI tools on the side — this little gallery app is one of the things that's come out of it.</p>
-  <div class="side-project-frame">
-    <iframe src="gradient-skies.html" title="Found in Nature — a side project" loading="lazy"></iframe>
+  <p class="desc">I'm teaching myself to code and experimenting with new AI tools on the side — these little apps are what's come out of it.</p>
+
+  <div class="side-project">
+    <h3 class="side-project-title">Found in Nature</h3>
+    <p class="side-project-desc">A gallery app for browsing gradient skies, built while getting comfortable with front-end code.</p>
+    <div class="side-project-frame">
+      <iframe src="gradient-skies.html" title="Found in Nature — a side project" loading="lazy"></iframe>
+    </div>
+    <a class="side-project-link" href="gradient-skies.html" target="_blank" rel="noopener">
+      Open full experience
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H8M17 7V16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
   </div>
-  <a class="side-project-link" href="gradient-skies.html" target="_blank" rel="noopener">
-    Open full experience
-    <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H8M17 7V16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-  </a>
+
+  <div class="side-project">
+    <h3 class="side-project-title">Sketch Planner</h3>
+    <p class="side-project-desc">Speak or type a messy list of tasks and AI turns it into a hand-drawn weekly or monthly Gantt chart — a small experiment in playful, AI-assisted UI.</p>
+    <div class="side-project-frame">
+      <iframe src="sketch-planner.html" title="Sketch Planner — a side project" loading="lazy"></iframe>
+    </div>
+    <a class="side-project-link" href="sketch-planner.html" target="_blank" rel="noopener">
+      Open full experience
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H8M17 7V16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
+  </div>
 </section>
 
 <section class="testimonials">
