@@ -143,6 +143,62 @@
   }
   .hero-cta:hover .dot{ transform:translateX(4px); }
 
+  /* ---------- Copy-email hint + toast ---------- */
+  .copy-hint{
+    margin-top:1.4rem;
+    display:inline-flex; align-items:center; gap:0.6rem;
+    font-family:var(--font-body);
+    font-size:var(--p3);
+    color:var(--text-faint);
+    cursor:pointer;
+    user-select:none;
+    background:none; border:none; padding:0;
+  }
+  .copy-hint kbd{
+    font-family:var(--font-body);
+    font-size:12px; font-weight:600;
+    color:var(--heading);
+    background:var(--surface);
+    border:1px solid var(--line);
+    border-bottom-width:2px;
+    border-radius:6px;
+    padding:0.15rem 0.5rem;
+    line-height:1.4;
+  }
+  .copy-hint:hover{ color:var(--heading); }
+  .copy-hint:hover kbd{ border-color:var(--coral); color:var(--coral); }
+
+  .toast{
+    position:fixed;
+    left:50%;
+    bottom:2.4rem;
+    transform:translate(-50%, 20px);
+    display:flex; align-items:center; gap:0.7rem;
+    background:var(--heading);
+    color:#fff;
+    font-family:var(--font-body);
+    font-size:var(--p3);
+    font-weight:500;
+    padding:0.85rem 1.2rem;
+    border-radius:10px;
+    box-shadow:0 12px 30px rgba(0,0,0,0.18);
+    opacity:0;
+    pointer-events:none;
+    transition:opacity 0.25s ease, transform 0.25s ease;
+    z-index:999;
+  }
+  .toast.show{
+    opacity:1;
+    transform:translate(-50%, 0);
+  }
+  .toast .toast-icon{
+    width:18px; height:18px;
+    border-radius:50%;
+    background:var(--coral);
+    display:flex; align-items:center; justify-content:center;
+    flex-shrink:0;
+  }
+
   /* ---------- Client logos row ---------- */
   .clients{
     padding: 1.5rem 8vw 4rem;
@@ -508,7 +564,17 @@
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M5 12H19M19 12L13 6M19 12L13 18" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
     </span>
   </a>
+  <button class="copy-hint" id="copyEmailHint" type="button">
+    Press <kbd>C</kbd> to copy my email address
+  </button>
 </section>
+
+<div class="toast" id="emailToast">
+  <span class="toast-icon">
+    <svg width="10" height="10" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17L4 12" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </span>
+  <span id="toastText">Email address copied</span>
+</div>
 
 <div class="clients">
   <div class="client-card"><img src="Emma-Sleep.png" alt="Emma Sleep"></div>
@@ -594,7 +660,7 @@
             <span class="chip">Visual Design</span><span class="chip">Campaign Design</span><span class="chip">Social &amp; Retail</span>
           </div>
         </div>
-        <div class="pair-card">
+        <div class="pair-card" data-href="harman-kardon.html">
           <div class="pair-visual">
             <img src="https://raw.githubusercontent.com/amything/my-portfolio/main/Harmon%20Kardon_Mockup.png" alt="Harman Kardon campaign cover">
           </div>
@@ -832,6 +898,56 @@
       const href = card.dataset.href || '#';
       if(href !== '#') window.location.href = href;
     });
+  });
+
+  // ---------- Press "C" (or click the hint) to copy email address ----------
+  const EMAIL = 'amruta.inbox@gmail.com';
+  const toast = document.getElementById('emailToast');
+  const toastText = document.getElementById('toastText');
+  const copyHint = document.getElementById('copyEmailHint');
+  let toastTimer;
+
+  function showToast(message){
+    toastText.textContent = message;
+    toast.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => toast.classList.remove('show'), 2400);
+  }
+
+  function copyEmail(){
+    const done = () => showToast('Email address copied — ' + EMAIL);
+    const fail = () => showToast('Could not copy — ' + EMAIL);
+
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(EMAIL).then(done).catch(fail);
+    } else {
+      // Fallback for older browsers
+      const temp = document.createElement('textarea');
+      temp.value = EMAIL;
+      temp.style.position = 'fixed';
+      temp.style.opacity = '0';
+      document.body.appendChild(temp);
+      temp.select();
+      try{
+        document.execCommand('copy');
+        done();
+      } catch(err){
+        fail();
+      }
+      document.body.removeChild(temp);
+    }
+  }
+
+  copyHint.addEventListener('click', copyEmail);
+
+  document.addEventListener('keydown', (e) => {
+    const tag = (e.target.tagName || '').toLowerCase();
+    const isTyping = tag === 'input' || tag === 'textarea' || e.target.isContentEditable;
+    if(isTyping || e.metaKey || e.ctrlKey || e.altKey) return;
+
+    if(e.key.toLowerCase() === 'c'){
+      copyEmail();
+    }
   });
 
 </script>
