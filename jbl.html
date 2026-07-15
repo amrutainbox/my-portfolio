@@ -173,49 +173,6 @@
     .grid-3{ grid-template-columns:1fr; }
   }
 
-  /* ---------- Magnetic carousel (JBL M images) ---------- */
-  .magnetic-carousel{
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    gap:16px;
-    position:relative;
-    padding:2.5rem 0;
-    min-height:400px;
-  }
-  .mag-backdrop{
-    position:absolute; inset:0; z-index:1;
-    display:none; cursor:pointer;
-  }
-  .magnetic-carousel.open .mag-backdrop{ display:block; }
-  .mag-item{
-    flex:0 0 auto;
-    width:140px;
-    height:340px;
-    border-radius:16px;
-    overflow:hidden;
-    background-size:cover;
-    background-position:center;
-    background-repeat:no-repeat;
-    background-color:var(--surface-2);
-    border:1px solid var(--line);
-    cursor:pointer;
-    position:relative;
-    z-index:2;
-    will-change:width, height;
-    transition:none;
-  }
-  .mag-item.open-transition{
-    transition:width 0.35s ease-in-out, height 0.35s ease-in-out, filter 0.35s ease-in-out, opacity 0.35s ease-in-out;
-  }
-  .mag-item.blurred{ filter:blur(3px); opacity:0.6; }
-  .mag-item.active{ z-index:3; }
-
-  @media (max-width: 720px){
-    .magnetic-carousel{ gap:10px; min-height:260px; padding:1.5rem 0; }
-    .mag-item{ width:78px; height:210px; border-radius:12px; }
-  }
-
   footer{
     margin-top:0; padding: 3.5rem 8vw 3rem;
     display:flex; justify-content:space-between; align-items:flex-end;
@@ -276,11 +233,10 @@
   <div class="block divider-block"><div class="divider"></div></div>
 
   <div class="block">
-    <div class="magnetic-carousel" id="jblMagCarousel">
-      <div class="mag-item" data-src="JBL M 2.png" aria-label="JBL creative M2"></div>
-      <div class="mag-item" data-src="JBL M 3.png" aria-label="JBL creative M3"></div>
-      <div class="mag-item" data-src="JBL M 1.png" aria-label="JBL creative M1"></div>
-      <div class="mag-backdrop"></div>
+    <div class="grid-3">
+      <div class="frame"><img src="JBL M 2.png" alt="JBL creative M2"></div>
+      <div class="frame"><img src="JBL M 3.png" alt="JBL creative M3"></div>
+      <div class="frame"><img src="JBL M 1.png" alt="JBL creative M1"></div>
     </div>
   </div>
 
@@ -310,137 +266,5 @@
 </footer>
 <div class="foot-note">© 2026 Amruta J — Brisbane, Australia</div>
 
-<script>
-(function(){
-  const container = document.getElementById('jblMagCarousel');
-  if(!container) return;
-
-  const items = Array.from(container.querySelectorAll('.mag-item'));
-  const backdrop = container.querySelector('.mag-backdrop');
-  const n = items.length;
-
-  const isMobile = () => window.matchMedia('(max-width: 720px)').matches;
-  const dims = () => isMobile()
-    ? { collapsedW: 78,  hoverW: 130, collapsedH: 210, hoverH: 250, openSize: 300, gap: 10, influence: 110 }
-    : { collapsedW: 140, hoverW: 260, collapsedH: 340, hoverH: 400, openSize: 560, gap: 16, influence: 220 };
-
-  let target = items.map(() => 0);
-  let cur = items.map(() => 0);
-  let openIndex = null;
-  let rafId = null;
-
-  items.forEach((el) => {
-    el.style.backgroundImage = `url('${el.getAttribute('data-src')}')`;
-  });
-
-  function sizeFor(i){
-    const { collapsedW, hoverW, collapsedH, hoverH, openSize } = dims();
-    if (openIndex !== null){
-      return i === openIndex
-        ? { w: openSize, h: openSize }
-        : { w: collapsedW, h: collapsedH };
-    }
-    const f = cur[i] || 0;
-    return {
-      w: collapsedW + (hoverW - collapsedW) * f,
-      h: collapsedH + (hoverH - collapsedH) * f,
-    };
-  }
-
-  function render(){
-    items.forEach((el, i) => {
-      const { w, h } = sizeFor(i);
-      el.style.width = w + 'px';
-      el.style.height = h + 'px';
-    });
-  }
-
-  function loop(){
-    let moving = false;
-    for (let i = 0; i < n; i++){
-      const d = (target[i] || 0) - cur[i];
-      if (Math.abs(d) > 0.001){ cur[i] += d * 0.2; moving = true; }
-      else { cur[i] = target[i] || 0; }
-    }
-    render();
-    rafId = moving ? requestAnimationFrame(loop) : null;
-  }
-
-  function startLoop(){
-    if (!rafId) rafId = requestAnimationFrame(loop);
-  }
-
-  function setTargetFromCursor(clientX){
-    const { collapsedW, gap, influence } = dims();
-    const rect = container.getBoundingClientRect();
-    const cx = clientX - rect.left;
-    const totalBase = n * collapsedW + (n - 1) * gap;
-    const startX = (rect.width - totalBase) / 2;
-    target = items.map((_, i) => {
-      const center = startX + i * (collapsedW + gap) + collapsedW / 2;
-      const dist = Math.abs(cx - center);
-      const f = Math.max(0, 1 - dist / influence);
-      return f * f * (3 - 2 * f);
-    });
-    startLoop();
-  }
-
-  container.addEventListener('mousemove', (e) => {
-    if (openIndex !== null) return;
-    setTargetFromCursor(e.clientX);
-  });
-  container.addEventListener('mouseleave', () => {
-    if (openIndex !== null) return;
-    target = items.map(() => 0);
-    startLoop();
-  });
-
-  function withTransition(fn){
-    items.forEach((el) => el.classList.add('open-transition'));
-    fn();
-    setTimeout(() => {
-      items.forEach((el) => el.classList.remove('open-transition'));
-    }, 380);
-  }
-
-  function open(i){
-    openIndex = i;
-    container.classList.add('open');
-    withTransition(() => {
-      items.forEach((el, j) => {
-        el.classList.toggle('blurred', j !== i);
-        el.classList.toggle('active', j === i);
-      });
-      render();
-    });
-  }
-
-  function close(){
-    target = items.map(() => 0);
-    cur = items.map(() => 0);
-    openIndex = null;
-    container.classList.remove('open');
-    withTransition(() => {
-      items.forEach((el) => {
-        el.classList.remove('blurred', 'active');
-      });
-      render();
-    });
-  }
-
-  items.forEach((el, i) => {
-    el.addEventListener('click', (e) => {
-      e.stopPropagation();
-      if (openIndex === i) close();
-      else open(i);
-    });
-  });
-  backdrop.addEventListener('click', close);
-
-  window.addEventListener('resize', render);
-
-  render();
-})();
-</script>
 </body>
 </html>
