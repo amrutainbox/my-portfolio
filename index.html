@@ -209,15 +209,20 @@
     margin:0 auto;
     padding: 1.5rem 8vw 4rem;
     display:flex;
-    flex-wrap:wrap;
+    flex-wrap:nowrap;
     align-items:center;
     gap:3.2rem 4.5rem;
     border-bottom:1px solid var(--line);
+    overflow-x:auto;
+    -webkit-overflow-scrolling:touch;
+    scrollbar-width:none;
   }
+  .clients::-webkit-scrollbar{ display:none; }
   .client-card{
     display:flex;
     align-items:center;
     justify-content:center;
+    flex:0 0 auto;
   }
   .clients img{
     height:150px;
@@ -227,8 +232,21 @@
     opacity:0.75;
     filter:grayscale(100%);
     transition:opacity 0.25s ease, filter 0.25s ease;
+    flex-shrink:0;
   }
   .clients img:hover{ opacity:1; filter:grayscale(0%); }
+
+  @media (max-width: 860px){
+    .clients{
+      gap:2rem 2.4rem;
+      padding: 1.5rem 6vw 3rem;
+    }
+    .clients img{
+      height:70px;
+      width:70px;
+      max-width:70px;
+    }
+  }
 
   /* ---------- Main layout (timeline) ---------- */
   main{
