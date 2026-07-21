@@ -63,12 +63,12 @@
     display:inline-block; font-size:13px; font-weight:600; color:var(--coral);
     text-transform:uppercase; letter-spacing:0.06em; margin-bottom:1.1rem;
   }
-  .cs-hero h1{ font-size:clamp(2rem, 4.6vw, var(--h1)); max-width:20ch; margin-bottom:1.1rem; }
+  .cs-hero h1{ font-size:clamp(2rem, 4.6vw, var(--h1)); max-width:34ch; margin-bottom:1.1rem; }
   .cs-hero .subhead{ font-size:var(--p1); color:var(--body-text); max-width:52ch; }
 
   .meta-grid{
     max-width:920px; margin:2.8rem auto 0; padding:0 8vw;
-    display:grid; grid-template-columns:repeat(5, 1fr); gap:1.5rem;
+    display:grid; grid-template-columns:repeat(3, 1fr); gap:1.5rem;
     border-top:1px solid var(--line); border-bottom:1px solid var(--line);
     padding-top:1.8rem; padding-bottom:1.8rem;
   }
@@ -77,29 +77,11 @@
 
   /* ---------- Hero visual: dashboard mockup ---------- */
   .hero-visual{ max-width:920px; margin:3.2rem auto 0.8rem; padding:0 8vw; }
-  .browser-mock{
-    background:var(--surface); border:1px solid var(--line); border-radius:14px;
-    overflow:hidden; box-shadow:0 20px 50px rgba(29,29,29,0.08);
+  .hero-subhead{ font-size:var(--p1); color:var(--body-text); max-width:52ch; margin:1.2rem auto 0; text-align:center; }
+  .dashboard-image{
+    width:100%; height:auto; display:block;
+    border-radius:14px;
   }
-  .browser-mock .bar{
-    display:flex; align-items:center; gap:6px;
-    padding:0.8rem 1rem; border-bottom:1px solid var(--line); background:var(--surface-2);
-  }
-  .browser-mock .bar span{ width:9px; height:9px; border-radius:50%; background:var(--line); }
-  .dash-zones{ display:grid; grid-template-columns:1fr 1fr 1fr; gap:1px; background:var(--line); }
-  .dash-zone{ background:var(--surface); padding:2.2rem 1.3rem; text-align:center; position:relative; }
-  .dash-zone .zone-label{
-    display:inline-block; font-size:12px; font-weight:600; letter-spacing:0.04em; text-transform:uppercase;
-    padding:0.3rem 0.7rem; border-radius:20px; margin-bottom:0.9rem;
-  }
-  .dash-zone.work .zone-label{ background:var(--coral-dim); color:var(--coral); }
-  .dash-zone.growth .zone-label{ background:var(--cobalt-dim); color:var(--cobalt); }
-  .dash-zone.support .zone-label{ background:rgba(61,174,110,0.12); color:var(--green); }
-  .dash-zone .zone-lines{ display:flex; flex-direction:column; gap:0.5rem; margin-top:0.4rem; }
-  .dash-zone .zone-lines i{ display:block; height:8px; border-radius:4px; background:var(--surface-2); }
-  .dash-zone .zone-lines i:nth-child(1){ width:85%; }
-  .dash-zone .zone-lines i:nth-child(2){ width:60%; }
-  .dash-zone .zone-lines i:nth-child(3){ width:72%; }
   .visual-caption{
     text-align:center; font-size:14px; color:var(--text-faint); margin-top:1rem; max-width:56ch;
     margin-left:auto; margin-right:auto;
@@ -248,6 +230,15 @@
   .outcome-tile .o-text{ font-size:14.5px; color:#EDEDED; }
   @media (max-width:640px){ .outcome-grid{ grid-template-columns:1fr; } }
 
+  /* ---------- Outcome statement ---------- */
+  .outcome-statement{
+    background:var(--heading); border-radius:16px; padding:2rem 2.2rem; margin-top:1.6rem;
+  }
+  .outcome-statement p{
+    font-family:var(--font-heading); font-size:clamp(1.1rem, 2vw, 22px); font-weight:600;
+    color:#fff; max-width:none; margin-bottom:0; line-height:1.45;
+  }
+
   /* ---------- Gamification before/after ---------- */
   .gami-grid{ display:grid; grid-template-columns:1fr 1fr; gap:1.1rem; margin-top:1.6rem; }
   .gami-card{ border-radius:14px; padding:1.6rem 1.4rem; border:1px solid var(--line); }
@@ -285,38 +276,18 @@
 </div>
 
 <div class="cs-hero">
-  <span class="tag-label">Product Design · UX Research · 2024</span>
   <h1>Turning an Internal Dashboard into an Employee Growth Hub</h1>
-  <p class="subhead">Designing a personalised workplace platform for visibility, recognition, and career growth.</p>
-</div>
-
-<div class="meta-grid">
-  <div><div class="m-label">Role</div><div class="m-val">Product Designer<br>UX Researcher<br>UI Designer</div></div>
-  <div><div class="m-label">Timeline</div><div class="m-val">6 weeks</div></div>
-  <div><div class="m-label">Tools</div><div class="m-val">Figma<br>Miro<br>InVision</div></div>
-  <div><div class="m-label">Team</div><div class="m-val">3 UX Designers<br>2 Product Owners<br>1 Front-End Dev</div></div>
-  <div><div class="m-label">Stage</div><div class="m-val">Concept-stage<br>Mid-fidelity, user-tested</div></div>
 </div>
 
 <div class="hero-visual">
-  <div class="browser-mock">
-    <div class="bar"><span></span><span></span><span></span></div>
-    <div class="dash-zones">
-      <div class="dash-zone work">
-        <span class="zone-label">Work</span>
-        <div class="zone-lines"><i></i><i></i><i></i></div>
-      </div>
-      <div class="dash-zone growth">
-        <span class="zone-label">Growth</span>
-        <div class="zone-lines"><i></i><i></i><i></i></div>
-      </div>
-      <div class="dash-zone support">
-        <span class="zone-label">Support</span>
-        <div class="zone-lines"><i></i><i></i><i></i></div>
-      </div>
-    </div>
-  </div>
-  <p class="visual-caption">An internal employee dashboard redesigned around daily work visibility, career growth, and support.</p>
+  <img class="dashboard-image" src="Dashboard_Design.png" alt="PSP employee dashboard design shown on a laptop, with additional dashboard screens layered behind it">
+  <p class="hero-subhead">Designing a personalised workplace platform for visibility, recognition, and career growth.</p>
+</div>
+
+<div class="meta-grid">
+  <div><div class="m-label">Role</div><div class="m-val">Led end-to-end experience design, interaction model, design system, and motion.</div></div>
+  <div><div class="m-label">Timeline</div><div class="m-val">6 weeks</div></div>
+  <div><div class="m-label">Tools</div><div class="m-val">Figma<br>Miro<br>InVision</div></div>
 </div>
 
 <section class="cs-block">
@@ -573,6 +544,10 @@
     <div class="outcome-tile"><div class="o-num">04</div><div class="o-text">Early design system foundation</div></div>
   </div>
   <p class="visual-caption">Validated through 5-user usability testing and a SUS score of 79.</p>
+
+  <div class="outcome-statement">
+    <p>The concept evolved from a static dashboard into a personalised employee growth hub, tested, validated, and built to scale.</p>
+  </div>
 </section>
 
 <hr class="divider">
