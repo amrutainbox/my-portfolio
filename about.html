@@ -131,10 +131,10 @@
 
   /* ---------- Interests strip ---------- */
   .interests{
-    max-width:1280px; margin:0 auto;
-    padding:0 8vw 6rem;
+    max-width:1600px; margin:0 auto;
+    padding:0 4vw 6rem;
   }
-  .interests h3{ font-size:var(--h4); margin-bottom:1.8rem; }
+  .interests h3{ font-size:var(--h4); margin-bottom:1.8rem; padding-left:4vw; }
 
   /* ---------- Magnetic gallery (macOS-dock style hover carousel) ---------- */
   .magnetic-carousel{
@@ -142,7 +142,7 @@
     display:flex;
     align-items:center;
     justify-content:center;
-    gap:16px;
+    gap:24px;
     padding:1rem 0 1.5rem;
   }
   .mc-backdrop{
@@ -157,7 +157,7 @@
   .mc-bar{
     position:relative;
     flex:none;
-    width:100px; height:340px;
+    width:180px; height:420px;
     border-radius:14px;
     overflow:hidden;
     background:var(--surface-2);
@@ -255,16 +255,20 @@
   <div class="magnetic-carousel" id="magneticCarousel">
     <div class="mc-backdrop" id="mcBackdrop"></div>
     <div class="mc-bar" data-index="0">
-      <div class="mc-label">Photo 1 — replace with your own image</div>
+      <img src="gallery-1.jpg" alt="Gallery photo 1" onerror="this.style.display='none'">
+      <div class="mc-label">Photo 1 — replace src="gallery-1.jpg"</div>
     </div>
     <div class="mc-bar" data-index="1">
-      <div class="mc-label">Photo 2 — replace with your own image</div>
+      <img src="gallery-2.jpg" alt="Gallery photo 2" onerror="this.style.display='none'">
+      <div class="mc-label">Photo 2 — replace src="gallery-2.jpg"</div>
     </div>
     <div class="mc-bar" data-index="2">
-      <div class="mc-label">Photo 3 — replace with your own image</div>
+      <img src="gallery-3.jpg" alt="Gallery photo 3" onerror="this.style.display='none'">
+      <div class="mc-label">Photo 3 — replace src="gallery-3.jpg"</div>
     </div>
     <div class="mc-bar" data-index="3">
-      <div class="mc-label">Photo 4 — replace with your own image</div>
+      <img src="gallery-4.jpg" alt="Gallery photo 4" onerror="this.style.display='none'">
+      <div class="mc-label">Photo 4 — replace src="gallery-4.jpg"</div>
     </div>
   </div>
 </section>
@@ -302,9 +306,9 @@
     const n = bars.length;
     if(!n) return;
 
-    const collapsedWidth = 100, hoverWidth = 200;
-    const collapsedHeight = 340, hoverHeight = 400;
-    const openSize = 600, gap = 16, influence = 200;
+    const collapsedWidth = 180, hoverWidth = 300;
+    const collapsedHeight = 420, hoverHeight = 480;
+    const openSize = 640, gap = 24, influence = 240;
 
     let target = bars.map(() => 0);
     let cur = bars.map(() => 0);
