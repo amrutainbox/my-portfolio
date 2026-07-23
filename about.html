@@ -118,6 +118,17 @@
     line-height:1.75; margin-bottom:1.3rem; max-width:56ch;
   }
 
+  /* ---------- Sticky photo (desktop only) ----------
+     Keeps the photo pinned in the viewport while the
+     longer bio text column scrolls past it. */
+  @media (min-width: 861px){
+    .about-photo{
+      position: sticky;
+      top: 3rem;          /* distance from top of viewport where it "catches" */
+      align-self: start;  /* stops the grid from stretching it to match text height */
+    }
+  }
+
   /* ---------- Interests strip ---------- */
   .interests{
     max-width:1280px; margin:0 auto;
@@ -195,15 +206,6 @@
   footer .social-icons a:hover{ background:var(--coral); border-color:var(--coral); color:#fff; }
   footer .foot-note{ width:100%; margin-top:3rem; font-family:var(--font-body); font-size:var(--p3); color:var(--text-faint); letter-spacing:0.02em; }
 
-  /* ---------- Sticky photo on desktop ---------- */
-  @media (min-width: 861px){
-    .about-photo{
-      position: sticky;
-      top: 3rem;
-      align-self: start;
-    }
-  }
-
   @media (max-width: 860px){
     .topnav{ padding:2rem 6vw 0; }
     .about-hero{ grid-template-columns:1fr; gap:2.5rem; padding:3rem 6vw 3.5rem; }
@@ -253,16 +255,16 @@
   <div class="magnetic-carousel" id="magneticCarousel">
     <div class="mc-backdrop" id="mcBackdrop"></div>
     <div class="mc-bar" data-index="0">
-      <img src="images/gallery-1.jpg" alt="Gallery photo 1">
+      <div class="mc-label">Photo 1 — replace with your own image</div>
     </div>
     <div class="mc-bar" data-index="1">
-      <img src="images/gallery-2.jpg" alt="Gallery photo 2">
+      <div class="mc-label">Photo 2 — replace with your own image</div>
     </div>
     <div class="mc-bar" data-index="2">
-      <img src="images/gallery-3.jpg" alt="Gallery photo 3">
+      <div class="mc-label">Photo 3 — replace with your own image</div>
     </div>
     <div class="mc-bar" data-index="3">
-      <img src="images/gallery-4.jpg" alt="Gallery photo 4">
+      <div class="mc-label">Photo 4 — replace with your own image</div>
     </div>
   </div>
 </section>
