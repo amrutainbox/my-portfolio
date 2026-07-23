@@ -129,55 +129,32 @@
     }
   }
 
-  /* ---------- Interests strip ---------- */
+  /* ---------- Interests strip — matches homepage grid ---------- */
   .interests{
-    max-width:1600px; margin:0 auto;
-    padding:0 4vw 6rem;
+    max-width:1280px; margin:0 auto;
+    padding:0 8vw 6rem;
   }
-  .interests h3{ font-size:var(--h4); margin-bottom:1.8rem; padding-left:4vw; }
+  .interests h3{
+    display:flex; align-items:center; gap:0.6rem;
+    font-size:var(--h4); margin-bottom:1.8rem;
+  }
+  .interests h3 .coffee-icon{ font-size:0.8em; color:var(--coral); line-height:1; }
 
-  /* ---------- Magnetic gallery (macOS-dock style hover carousel) ---------- */
-  .magnetic-carousel{
-    position:relative;
-    display:flex;
-    align-items:center;
-    justify-content:center;
+  .interests-grid{
+    display:grid;
+    grid-template-columns: repeat(4, 1fr);
     gap:24px;
-    padding:1rem 0 1.5rem;
   }
-  .mc-backdrop{
-    position:absolute; inset:-2rem -8vw;
-    z-index:1;
-    pointer-events:none;
-    background:rgba(250,250,250,0.0);
-    transition:background 0.3s ease;
-  }
-  .mc-backdrop.active{ pointer-events:auto; background:rgba(250,250,250,0.55); }
-
-  .mc-bar{
+  .ig-card{
     position:relative;
-    flex:none;
-    width:180px; height:420px;
+    aspect-ratio: 180 / 420;
     border-radius:14px;
     overflow:hidden;
     background:var(--surface-2);
     border:1px solid var(--line);
-    cursor:pointer;
-    z-index:2;
-    will-change:width, height;
   }
-  .mc-bar.animate{
-    transition:width 0.3s ease-in-out, height 0.3s ease-in-out, filter 0.3s ease-in-out, opacity 0.3s ease-in-out;
-  }
-  .mc-bar.open{ z-index:3; }
-  .mc-bar.blurred{ filter:blur(2px); opacity:0.6; }
-
-  .mc-bar img{
-    width:100%; height:100%;
-    object-fit:cover; display:block;
-    position:relative; z-index:2;
-  }
-  .mc-bar .mc-label{
+  .ig-card img{ width:100%; height:100%; object-fit:cover; display:block; position:relative; z-index:2; }
+  .ig-card .ig-label{
     position:absolute; inset:0; z-index:1;
     display:flex; align-items:center; justify-content:center;
     color:var(--text-faint); font-size:var(--p3); text-align:center; padding:0.6rem;
@@ -211,19 +188,13 @@
     .about-hero{ grid-template-columns:1fr; gap:2.5rem; padding:3rem 6vw 3.5rem; }
     .about-photo{ margin-top:0; }
     .interests{ padding:0 6vw 4rem; }
+    .interests-grid{ grid-template-columns: repeat(2, 1fr); gap:16px; }
     footer{ align-items:flex-start; padding:3rem 6vw 2.5rem; }
     footer .contact-links{ align-items:flex-start; }
+  }
 
-    .magnetic-carousel{
-      justify-content:flex-start;
-      overflow-x:auto;
-      -ms-overflow-style:none; scrollbar-width:none;
-      padding:1rem 0 1rem;
-    }
-    .magnetic-carousel::-webkit-scrollbar{ display:none; }
-    .mc-bar{ width:140px !important; height:220px !important; flex:0 0 140px; }
-    .mc-bar.open{ width:80vw !important; height:80vw !important; max-width:340px !important; max-height:340px !important; }
-    .mc-backdrop{ inset:-1.5rem -6vw; }
+  @media (max-width: 500px){
+    .interests-grid{ grid-template-columns: repeat(2, 1fr); }
   }
 </style>
 </head>
@@ -251,24 +222,23 @@
 </section>
 
 <section class="interests">
-  <h3>What I do when I'm not working?</h3>
-  <div class="magnetic-carousel" id="magneticCarousel">
-    <div class="mc-backdrop" id="mcBackdrop"></div>
-    <div class="mc-bar" data-index="0">
+  <h3>What I do when I'm not working? <span class="coffee-icon">☕</span></h3>
+  <div class="interests-grid">
+    <div class="ig-card">
       <img src="gallery-1.jpg" alt="Gallery photo 1" onerror="this.style.display='none'">
-      <div class="mc-label">Photo 1 — replace src="gallery-1.jpg"</div>
+      <div class="ig-label">Photo 1 — replace src="gallery-1.jpg"</div>
     </div>
-    <div class="mc-bar" data-index="1">
+    <div class="ig-card">
       <img src="gallery-2.jpg" alt="Gallery photo 2" onerror="this.style.display='none'">
-      <div class="mc-label">Photo 2 — replace src="gallery-2.jpg"</div>
+      <div class="ig-label">Photo 2 — replace src="gallery-2.jpg"</div>
     </div>
-    <div class="mc-bar" data-index="2">
+    <div class="ig-card">
       <img src="gallery-3.jpg" alt="Gallery photo 3" onerror="this.style.display='none'">
-      <div class="mc-label">Photo 3 — replace src="gallery-3.jpg"</div>
+      <div class="ig-label">Photo 3 — replace src="gallery-3.jpg"</div>
     </div>
-    <div class="mc-bar" data-index="3">
+    <div class="ig-card">
       <img src="gallery-4.jpg" alt="Gallery photo 4" onerror="this.style.display='none'">
-      <div class="mc-label">Photo 4 — replace src="gallery-4.jpg"</div>
+      <div class="ig-label">Photo 4 — replace src="gallery-4.jpg"</div>
     </div>
   </div>
 </section>
@@ -294,119 +264,6 @@
   </div>
   <div class="foot-note">© 2026 Amruta J — Brisbane, Australia</div>
 </footer>
-
-<script>
-  /* ---------- Magnetic gallery (macOS-dock hover magnify + click-to-open) ---------- */
-  (function(){
-    const container = document.getElementById('magneticCarousel');
-    const backdrop = document.getElementById('mcBackdrop');
-    if(!container || !backdrop) return;
-
-    const bars = Array.from(container.querySelectorAll('.mc-bar'));
-    const n = bars.length;
-    if(!n) return;
-
-    const collapsedWidth = 180, hoverWidth = 300;
-    const collapsedHeight = 420, hoverHeight = 480;
-    const openSize = 640, gap = 24, influence = 240;
-
-    let target = bars.map(() => 0);
-    let cur = bars.map(() => 0);
-    let raf = 0;
-    let openIndex = null;
-
-    const isFinePointer = window.matchMedia('(pointer: fine)').matches;
-
-    function applySizes(){
-      bars.forEach((bar, i) => {
-        let w, h;
-        if(openIndex !== null){
-          if(i === openIndex){ w = openSize; h = openSize; }
-          else { w = collapsedWidth; h = collapsedHeight; }
-        } else {
-          const f = cur[i] || 0;
-          w = collapsedWidth + (hoverWidth - collapsedWidth) * f;
-          h = collapsedHeight + (hoverHeight - collapsedHeight) * f;
-        }
-        bar.style.width = w + 'px';
-        bar.style.height = h + 'px';
-      });
-    }
-
-    function loop(){
-      let moving = false;
-      for(let i = 0; i < n; i++){
-        const d = target[i] - cur[i];
-        if(Math.abs(d) > 0.001){ cur[i] += d * 0.2; moving = true; }
-        else { cur[i] = target[i]; }
-      }
-      applySizes();
-      raf = moving ? requestAnimationFrame(loop) : 0;
-    }
-    function startLoop(){ if(!raf) raf = requestAnimationFrame(loop); }
-
-    function setTargetFromCursor(clientX){
-      const rect = container.getBoundingClientRect();
-      const cx = clientX - rect.left;
-      const totalBase = n * collapsedWidth + (n - 1) * gap;
-      const startX = (rect.width - totalBase) / 2;
-      target = bars.map((_, i) => {
-        const center = startX + i * (collapsedWidth + gap) + collapsedWidth / 2;
-        const dist = Math.abs(cx - center);
-        const f = Math.max(0, 1 - dist / influence);
-        return f * f * (3 - 2 * f); // smoothstep falloff
-      });
-      startLoop();
-    }
-
-    if(isFinePointer){
-      container.addEventListener('mousemove', (e) => {
-        if(openIndex !== null) return;
-        setTargetFromCursor(e.clientX);
-      });
-      container.addEventListener('mouseleave', () => {
-        if(openIndex !== null) return;
-        target = bars.map(() => 0);
-        startLoop();
-      });
-    }
-
-    function openBar(i){
-      openIndex = i;
-      bars.forEach((bar, idx) => {
-        bar.classList.add('animate');
-        bar.classList.toggle('open', idx === i);
-        bar.classList.toggle('blurred', idx !== i);
-      });
-      backdrop.classList.add('active');
-      applySizes();
-    }
-
-    function closeAll(){
-      openIndex = null;
-      target = bars.map(() => 0);
-      cur = bars.map(() => 0);
-      bars.forEach(bar => {
-        bar.classList.remove('open');
-        bar.classList.remove('blurred');
-      });
-      backdrop.classList.remove('active');
-      applySizes();
-      setTimeout(() => bars.forEach(bar => bar.classList.remove('animate')), 320);
-    }
-
-    bars.forEach((bar, i) => {
-      bar.addEventListener('click', (e) => {
-        e.stopPropagation();
-        if(openIndex === i) closeAll();
-        else openBar(i);
-      });
-    });
-    backdrop.addEventListener('click', closeAll);
-
-    applySizes();
-  })();
-</script>
 
 </body>
 </html>
