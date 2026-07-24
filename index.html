@@ -10,6 +10,14 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
+  @font-face{
+    font-family:'Bricolage Grotesque Condensed';
+    src: url('BricolageGrotesque48ptCondensed-SemiBold.ttf') format('truetype');
+    font-weight:600;
+    font-style:normal;
+    font-display:swap;
+  }
+
   :root{
     /* ---- Colors (design system) ---- */
     --bg: #FAFAFA;
@@ -23,7 +31,7 @@
     --line: rgba(29,29,29,0.09);
 
     /* ---- Fonts ---- */
-    --font-heading: 'Bricolage Grotesque', 'Inter', sans-serif;
+    --font-heading: 'Bricolage Grotesque Condensed', 'Bricolage Grotesque', 'Inter', sans-serif;
     --font-body: 'Inter', sans-serif;
 
     /* ---- Type scale ---- */
@@ -59,7 +67,6 @@
   h1,h2,h3,h4,h5{
     font-family:var(--font-heading);
     font-weight:600;
-    font-stretch: 75%;
     color:var(--heading);
     letter-spacing:0.01em;
     line-height:1.15;
